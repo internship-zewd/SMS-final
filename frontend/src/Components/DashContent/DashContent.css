@@ -6,7 +6,7 @@
     
  }
 
- .top {
+ /* .top {
      display: flex;
      top: 0;
      justify-content: space-between;
@@ -16,7 +16,7 @@
      padding: 10px 14px;
      background-color: var(--dark-color);
      z-index: 3;
- }
+ } */
 
  .top .sidebarToggle {
      font-size: 26px;

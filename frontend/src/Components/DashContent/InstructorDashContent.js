@@ -10,7 +10,7 @@ function InsDashContent() {
       <div className="box box2">
         <i className="uil uil-books"></i>
         <span className="text">Total Courses</span>
-        <span className="number"></span>
+        <span className="number">100</span>
       </div>
 
       <div className="box box3">

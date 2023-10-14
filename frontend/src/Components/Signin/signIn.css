@@ -38,7 +38,7 @@ section .contentBx{
     display: flex;
     justify-content: center;
     width: 50%;
-    background: var(--lighter-color);
+    background: var(--dark-color);
 }
 section .contentBx .formBx{
     width: 70%;
@@ -55,7 +55,7 @@ section .contentBx .formBx{
   }
   
 section .contentBx .formBx h2{
-    color: goldenrod;
+    color: var(--primary-color);
     font-weight: 600;
     font-size: 1.5em;
     text-transform: uppercase;
@@ -68,7 +68,7 @@ section .contentBx .formBx .inputBx span{
     font-size: 16px;
     margin-bottom: 5px;
     display: inline-block;
-    color:#525050;
+    color: var(--text-color);
     font-weight: 300;
     letter-spacing: 1px;
 }
