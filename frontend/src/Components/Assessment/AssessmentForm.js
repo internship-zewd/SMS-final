@@ -109,7 +109,7 @@ function AssessmentForm() {
     <div className="dashContent">
       <div className="overview">
         <div className="title">
-          <i class="uil uil-file-alt"></i>
+          <i class="uil uil-check-square"></i>
           <span className="text">Assessment/Assessment Form</span>
         </div>
       </div>
