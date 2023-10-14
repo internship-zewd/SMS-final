@@ -126,9 +126,9 @@ await axios.get(`http://localhost:8081/instructor`)
 
 
                 <div className="activity">
-                    <div className="title">
+                    {/* <div className="title">
                         <span className="textActivities">Activities</span>
-                    </div>
+                    </div> */}
 
                     <div className="activityData">
                         <div className='charts'>

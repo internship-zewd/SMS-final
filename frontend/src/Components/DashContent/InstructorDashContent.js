@@ -8,8 +8,8 @@ function InsDashContent() {
       </div>
 
       <div className="box box2">
-        <i className="uil uil-books"></i>
-        <span className="text">Total Courses</span>
+        <i className="uil uil-presentation"></i>
+        <span className="text">Total Classes Assigned</span>
         <span className="number">100</span>
       </div>
 
