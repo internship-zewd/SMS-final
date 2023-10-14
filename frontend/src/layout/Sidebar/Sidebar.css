@@ -19,8 +19,9 @@
 }
 
 .sideBar .logo {
-    display: flex;
+    /* display: flex; */
     align-items: center;
+    left: 20px;
 }
 
 .sideBar .logoImage {
@@ -31,7 +32,7 @@
 }
 
 .sideBar .logoImage img {
-    width: 35px;
+    width: 40px;
     object-fit: cover;
     border-radius: 50%;
     cursor: pointer;
@@ -42,8 +43,8 @@
     font-weight: 600;
     color: var(--darker-color);
     margin-left: 12px;
-    transition: var(--tran-05);
-
+    transition: var(--tran-02);
+    align-items: center;
 }
 
 .close .logoName {

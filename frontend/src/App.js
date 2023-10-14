@@ -26,17 +26,12 @@ import AllCoDashboard from './Components/Course/AllDash';
 import AttendanceDashboard from './Components/Report/AttendanceDash';
 import ReportDashboard from './Components/Report/ReportDash';
 import NewMDashboard from './Components/Message/MessageDash';
-<<<<<<< Updated upstream
-import AddRemindDashboard from "./Components/To-Do/AddRemindDashboard";
-import ManageRemindDashboard from "./Components/To-Do/ArchiveRemindDashboard";
-import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
-
-=======
-import ArchiveDashboard from './Components/Message/ArchiveDash';
+// import ArchiveDashboard from './Components/Message/ArchiveDash';
 import AssessmentDashboard from './Components/Assessment/AssessmentDash';
 import MarkDashboard from './Components/MarkList/MarkDash';
->>>>>>> Stashed changes
-
+import AddRemindDashboard from './Components/To-Do/AddRemindDashboard';
+import ManageRemindDashboard from './Components/To-Do/ManageRemindDashboard';
+import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
@@ -144,7 +139,6 @@ function App() {
         />
         <Route
           path="/Course/AllCourse"
-<<<<<<< Updated upstream
           element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AllCoDashboard /> : <Navigate to="/" />}
       />
       <Route
@@ -161,17 +155,6 @@ function App() {
       />
 
       
-=======
-          element={
-            localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Admin" ? (
-              <AllCoDashboard />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
->>>>>>> Stashed changes
         <Route
           path="/Attendance/TakeAttendance"
           element={
@@ -217,10 +200,7 @@ function App() {
             )
           }
         />
-<<<<<<< Updated upstream
-    
-=======
-        <Route
+        {/* <Route
           path="/Message/Archive"
           element={
             localStorage.getItem("access-token") !== null &&
@@ -230,7 +210,7 @@ function App() {
               <Navigate to="/" />
             )
           }
-        />
+        /> */}
         <Route
           path="/Assessment/Assessment"
           element={
@@ -253,7 +233,6 @@ function App() {
             )
           }
         />
->>>>>>> Stashed changes
       </Routes>
     </Router>
   );

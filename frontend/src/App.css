@@ -233,7 +233,7 @@ nav.close li a .linkName {
 } */
 
 
-.top .dropdown {
+/* .top .dropdown {
   float: right;
   overflow: hidden;
 }
@@ -283,7 +283,7 @@ nav.close li a .linkName {
 
 .dropdown:hover .dropDownPContent {
   display: block;
-} 
+}  */
 
 .dashboard .dashContent {
   padding-top: 30px;
