@@ -26,12 +26,12 @@ import AllCoDashboard from './Components/Course/AllDash';
 import AttendanceDashboard from './Components/Report/AttendanceDash';
 import ReportDashboard from './Components/Report/ReportDash';
 import NewMDashboard from './Components/Message/MessageDash';
-// import ArchiveDashboard from './Components/Message/ArchiveDash';
+import AddRemindDashboard from "./Components/To-Do/AddRemindDashboard";
+import ManageRemindDashboard from "./Components/To-Do/ArchiveRemindDashboard";
+import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
 import AssessmentDashboard from './Components/Assessment/AssessmentDash';
 import MarkDashboard from './Components/MarkList/MarkDash';
-import AddRemindDashboard from './Components/To-Do/AddRemindDashboard';
-import ManageRemindDashboard from './Components/To-Do/ManageRemindDashboard';
-import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
@@ -161,6 +161,17 @@ function App() {
             localStorage.getItem("access-token") !== null &&
             localStorage.getItem("role") === "Admin" ? (
               <AttendanceDashboard />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+          <Route
+          path="/Assessment/AssessmentForm"
+          element={
+            localStorage.getItem("access-token") !== null &&
+            localStorage.getItem("role") === "Instructor" ? (
+              <AssessmentDashboard />
             ) : (
               <Navigate to="/" />
             )
