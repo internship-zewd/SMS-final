@@ -187,3 +187,20 @@
 .dropdown li a:hover span {
     color: var(--hover-color);
 }
+
+button{
+    
+            /* position: relative; */
+    
+            font-size: 28px;
+            border: none;
+            cursor: pointer;
+            outline: none;
+           
+            padding: 6px 25px;
+            background-color: inherit;
+            margin: 0;
+            border-radius: 10px;
+            z-index: 999;
+        
+}

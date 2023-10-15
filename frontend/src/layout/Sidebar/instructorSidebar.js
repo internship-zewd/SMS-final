@@ -2,7 +2,7 @@ export const instructorSidebar = [
   {
     name: "Dashboard",
     iconClassName: "uil uil-estate",
-    to: "/",
+    to: "/dashboard",
   },
   {
     name: "To-Do",

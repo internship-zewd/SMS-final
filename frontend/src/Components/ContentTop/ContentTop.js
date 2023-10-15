@@ -1,10 +1,18 @@
-import React from 'react'
+// import React from 'react'
 import './ContentTop.css'
 
-import  { useState } from 'react';
+// import  { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
+import React, { useState, useContext } from 'react';
+
+// import { AuthContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
 
 
-  
+ 
+
+
 
 function ContentTop({click}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +25,24 @@ function ContentTop({click}) {
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
+
+  // const { handleLogout } = useContext(AuthContext);
+  
+  const navigate = useNavigate();
+
+  
+
+  const handleLogoutClick = () => {
+    console.log("button is clicked");
+    // handleLogout();
+    // navigate('/'); // Navigate to the desired route
+  };  
+
+
+
+
+
+
   return (
     <div className="top">
       <i className="uil uil-bars sidebarToggle" onClick={click}></i>
@@ -37,18 +63,34 @@ function ContentTop({click}) {
                       </div> */}
 
         {isOpen && (
-          <div className='droplist' >
+          <div className="droplist">
             <ul>
-             <div className='listcontent'> 
-              <li><a href="#"><i className="uil uil-user-square"></i><span>Profile</span></a></li>
-              <li> <a href="#"><i className="uil uil-setting"></i><span>Setting</span></a></li>
-              <li> <a href="#"><i className="uil uil-signout"></i><span>Logout</span></a></li>
+              <div className="listcontent">
+                <li>
+                  <NavLink to="/Profile/ViewProfile">
+                    <i className="uil uil-user-square"></i>
+                    <span>Profile</span>
+                  </NavLink>
+                </li>
+                <li>
+                  {" "}
+                  <NavLink to="">
+                    <i className="uil uil-setting"></i>
+                    <span>Setting</span>
+                  </NavLink>
+                </li>
+                <li>
+                  {" "}
+                  <NavLink to="">
+                    <i className="uil uil-signout"></i>
+                    <button onClick={handleLogoutClick}>Logout</button>
+                  </NavLink>
+                </li>
               </div>
             </ul>
           </div>
         )}
       </div>
-
 
       <i className="uil uil-bell notify"></i>
       <i className="uil uil-schedule toDo"></i>
@@ -57,3 +99,16 @@ function ContentTop({click}) {
 }
 
 export default ContentTop
+
+
+
+
+
+
+
+
+
+
+ 
+               
+             

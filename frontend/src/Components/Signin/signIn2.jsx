@@ -45,7 +45,7 @@ function SignIn2 () {
         
     };
     return(
-        <div className="full_content">
+        <div className="fullcontent">
                     <section>
                         <div className="imgBx">
                             <img src={zewdlogo} alt='' />
