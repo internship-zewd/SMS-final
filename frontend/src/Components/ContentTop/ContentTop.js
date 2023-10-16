@@ -10,7 +10,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
- 
+ import Profile from "../../resource/images/profile.png";
 
 
 
@@ -54,7 +54,15 @@ function ContentTop({click}) {
 
       <div className="dropdown">
         <button className="dropbtn" onClick={handleButtonClick}>
-          <i className="uil uil-user profile"></i>
+          {/* <i className="uil uil-user profile"></i> */}
+          
+           
+              <img className='userProfile'
+                src={Profile}
+                
+                alt="User profile"
+              />
+          
         </button>
         {/* <div id="dropDownP" >
                            <a href="#"><i className="uil uil-user-square"></i>Profile</a>
@@ -74,7 +82,7 @@ function ContentTop({click}) {
                 </li>
                 <li>
                   {" "}
-                  <NavLink to="">
+                  <NavLink to="/Settings">
                     <i className="uil uil-setting"></i>
                     <span>Setting</span>
                   </NavLink>

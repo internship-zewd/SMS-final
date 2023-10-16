@@ -183,10 +183,10 @@ form .button input:hover select:hover {
     margin-top: 20px;
   }
   
-  .table th,
+  /* .table th,
   .table td {
-    /* Your styles for table headers and cells */
+    Your styles for table headers and cells
     padding: 10px;
     text-align: left;
     border: 1px solid #ccc;
-  }
+  } */

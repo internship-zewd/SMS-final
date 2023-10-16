@@ -1,7 +1,8 @@
 import React from 'react';
-import './Profile.css';
 import '../DashContent/DashContent.css';
+import "./Profile.css";
 import Profile from "../../resource/images/profile.png";
+import { NavLink } from "react-router-dom";
 
 const UserProfile = () => {
   return (
@@ -12,95 +13,7 @@ const UserProfile = () => {
           <span className="text">Profile</span>
         </div>
         <div className="content">
-          {/* <div className="user-details"> */}
-
-          {/* <div className="putMarginForAll"> */}
-          {/* <div className="main-content"> */}
-          {/* Top navbar */}
-          {/* <nav
-                className="navbar navbar-top navbar-expand-md navbar-dark"
-                id="navbar-main"
-              > */}
-          {/* <div className="container-fluid"> */}
-          {/* Brand */}
-          {/* <h4 className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block firstContent">
-                    User profile
-                  </h4> */}
-          {/* Form */}
-          {/* <form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-                    <div className="form-group mb-0">
-                      <div className="input-group input-group-alternative">
-                        <div className="input-group-prepend">
-                          <span className="input-group-text">
-                            <i className="fas fa-search"></i>
-                          </span>
-                        </div>
-                        <input
-                          className="form-control"
-                          placeholder="Search"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                  </form> */}
-
-          {/* User */}
-          {/* <ul className="navbar-nav align-items-center d-none d-md-flex">
-                    <li className="nav-item dropdown">
-                      <a
-                        className="nav-link pr-0"
-                        href="#"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <div className="media ">
-                          <span className="avatar avatar-sm rounded-circle">
-                            <img src={Logo} alt="Image placeholder" />
-
-                           
-                          </span>
-                          <div className="media-body ml-2 d-none d-lg-block">
-                            <span className="mb-0 text-sm font-weight-bold">
-                              Someone
-                            </span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul> */}
-
-          {/* </div> */}
-          {/* </nav> */}
-
-          {/* Header */}
-          {/* <div
-                className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-                style={{
-                  minHeight: "600px",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center top",
-                }}
-              > */}
-          {/* Mask */}
-          {/* <span className="mask bg-gradient-default opacity-8"></span> */}
-          {/* Header container */}
-          {/* <div className="container-fluid d-flex align-items-center">
-                  <div className="row firstContent">
-                    <div>
-                      <h1 className="helloUser">Hello User</h1>
-                      <p className="profileDescription">
-                        This is your profile page.
-                      </p>
-                      <a href="#!" className="btn btn-info">
-                        Edit profile
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-
+  
           {/* Page content */}
           <div className="container-fluid mt--7">
             <div className="row">
@@ -130,20 +43,15 @@ const UserProfile = () => {
               </div>
               <div className="col-xl-8 order-xl-1">
                 <div className="card bg-secondary shadow">
-                  <div className="card-header bg-white border-0">
+                  <div className="card-header  border-0">
                     <div className="row align-items-center">
                       <div className="col-8">
                         <h3 className="mb-0">My account</h3>
                       </div>
-                      <div className="col-4 text-right">
-                        <a href="#!" className="btn btn-sm btn-warning">
-                           Edit
-                          {/* Settings */}
-                        </a>
-                      </div>
+                      <div className="col-4 text-right"></div>
                     </div>
                   </div>
-                  <div className="card-body">
+                  <div className="card-body bg-white">
                     <form>
                       <h6 className="heading-small text-muted mb-4">
                         User information
@@ -283,6 +191,13 @@ const UserProfile = () => {
                       </div>
                       <hr className="my-4" />
                     </form>
+                    <div className="editBtn">
+                      {" "}
+                      <NavLink  className="btn btn-warning btnForAll ">
+                        Edit
+                        
+                      </NavLink>
+                    </div>
                   </div>
                 </div>
               </div>

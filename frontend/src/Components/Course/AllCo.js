@@ -117,10 +117,10 @@ function AllCo() {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th> Course Id.</th>
+              {/* <th> Course Id.</th> */}
               <th>Course Name</th>
-              <th>Tuition Fee</th>
-              <th>Duration</th>
+              {/* <th>Tuition Fee</th>
+              <th>Duration</th> */}
               <th>Actions</th>
             </tr>
           </thead>
@@ -132,11 +132,11 @@ function AllCo() {
                   : item.course_name.toLowerCase().includes(search);
               })
               .map((item, index) => (
-                <tr key={item.id}>
-                  <td>{item.id_tag}</td>
+                <tr className='actionIcons' key={item.id}>
+                  {/* <td>{item.id_tag}</td> */}
                   <td>{item.course_name}</td>
-                  <td>{item.fee}</td>
-                  <td>{item.course_duration}</td>
+                  {/* <td>{item.fee}</td>
+                  <td>{item.course_duration}</td> */}
 
                   <button
                     className="btn btn-primary btn-sm me-2"

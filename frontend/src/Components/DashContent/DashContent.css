@@ -247,3 +247,15 @@
     clear: both;
     border: 2px solid black
 }
+
+.table th,
+  .table td {
+    /* Your styles for table headers and cells */
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  .actionIcons{
+    text-align: center;
+  }

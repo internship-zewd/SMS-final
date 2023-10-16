@@ -179,7 +179,7 @@ function AllEm() {
                   : item.full_name.toLowerCase().includes(search);
               })
               .map((item, index) => (
-                <tr key={item.id}>
+                <tr className="actionIcons" key={item.id}>
                   {console.log(data)}
                   <td>{item.id_tag}</td>
                   <td>{item.full_name}</td>

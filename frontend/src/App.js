@@ -32,6 +32,7 @@ import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
 import AssessmentDashboard from './Components/Assessment/AssessmentDash';
 import MarkDashboard from './Components/MarkList/MarkDash';
 import ProfileDashboard from './Components/Profile/ProfileDash';
+import SettingsDash from './Components/Settings/SettingsDash';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -279,6 +280,18 @@ function App() {
             localStorage.getItem("access-token") !== null &&
             localStorage.getItem("role") === "Instructor" ? (
               <ProfileDashboard />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+
+        <Route
+          path="/Settings"
+          element={
+            localStorage.getItem("access-token") !== null &&
+            localStorage.getItem("role") === "Instructor" ? (
+              <SettingsDash />
             ) : (
               <Navigate to="/" />
             )

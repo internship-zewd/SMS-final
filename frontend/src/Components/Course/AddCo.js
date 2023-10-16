@@ -13,12 +13,10 @@ function AddCo() {
         let validationErrors={}
         let regcourseName=/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/ ;
 
-        if(!regcourseName.test(courseName)){
-            validationErrors.courseName="Course name should consist of only letter";
-        }else if(courseName.length<3){
+        if(courseName.length<3){
             validationErrors.courseName="Course name is supposed to be atleast 3 characters"
-        }else if(courseName.length>15){
-            validationErrors.courseName="Course name should be less than 16 characters"
+        }else if(courseName.length>24){
+            validationErrors.courseName="Course name should be less than 25 characters"
         }
 
         if(!fee.trim()){
