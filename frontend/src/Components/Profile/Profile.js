@@ -193,7 +193,7 @@ const UserProfile = () => {
                     </form>
                     <div className="editBtn">
                       {" "}
-                      <NavLink  className="btn btn-warning btnForAll ">
+                      <NavLink to='/Settings' className="btn btn-warning btnForAll ">
                         Edit
                         
                       </NavLink>
