@@ -1,10 +1,10 @@
 
 const { createToken } = require('../JWT');
 const { admin } = require ('../models');
-const { passwordReset } = require ('../models');
 const { instructor } = require ('../models');
 const { manager }= require ('../models');
 const { accountant } = require ('../models');
+const {password_reset} = require('../models')
 const bcrypt = require('bcryptjs')
 
 const crypto = require('crypto');
@@ -102,17 +102,17 @@ const sendEmail = async (email, token) => {
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'your_email@gmail.com',
-      pass: 'your_password',
+      user: 'exopain2930@gmail.com',
+      pass: process.env.appPassword,
     },
   });
 
   // Send email with the token
   let info = await transporter.sendMail({
-    from: 'your_email@gmail.com',
+    from: 'exopain2930@gmail.com',
     to: email,
     subject: 'Password Reset',
-    text: `Click on the following link to reset your password: http://localhost:4000/reset-password?token=${token}`,
+    text: `Click on the following link to reset your password: http://localhost:3000/resetPassword?token=${token}`,
   });
 
   console.log('Email sent:', info.messageId);
@@ -138,7 +138,7 @@ const forgotPassword = async(req, res) =>{
         }
         
         if(!user){
-            res.json({msg: "User doesn't exist"})
+            res.json({success: fasle, msg: "Email doesn't exist"})
         }
 
         const token = generateToken();

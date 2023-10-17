@@ -37,6 +37,7 @@ import AttendanceDashboard from './Components/Attendance/AttendanceDash';
 import SpecificMessageDashboard from './Components/Message/SpecificMessageDash';
 import NotificationDashboard from "./Components/To-Do/NotificationDashboard"
 import ReportAttendanceDashboard from "./Components/Report/ReportAttendanceDash"
+import EditDashboard from './Components/Profile/EditDash';
 
 
 
@@ -302,9 +303,20 @@ function App() {
         <Route
           path="/Profile/ViewProfile"
           element={
-            localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Instructor" ? (
+            localStorage.getItem("access-token") !== null
+             ? (
               <ProfileDashboard />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        <Route
+          path="/EditProfile"
+          element={
+            localStorage.getItem("access-token") !== null
+             ? (
+              <EditDashboard />
             ) : (
               <Navigate to="/" />
             )
@@ -316,19 +328,6 @@ function App() {
           element={
             localStorage.getItem("access-token") !== null &&
             localStorage.getItem("role") === "Instructor" ? (
-              <AttendanceDashboard />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
-
-
-        <Route
-          path="/Settings"
-          element={
-            localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Admin"||"Instructor"||"Manager"||"Accountant"? (
               <SettingsDash />
             ) : (
               <Navigate to="/" />

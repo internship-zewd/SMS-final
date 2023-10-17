@@ -1,10 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom'
+import axios from 'axios';
 import '../DashContent/DashContent.css';
 import "./Profile.css";
 import Profile from "../../resource/images/profile.png";
 import { NavLink } from "react-router-dom";
 
-const UserProfile = () => {
+let username = null
+let email= null
+let firstName = null
+let lastName = null
+let phonenumber = null
+let password = null
+let userInfoSetting = {}
+
+function UserProfile () {
+  const [userInfo, setUserInfo] = useState({})
+  const role = localStorage.getItem("role")
+  const usernameName = localStorage.getItem("username") 
+  console.log(role);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+
+    axios.post("http://localhost:8081/profile/getProfile", {role, usernameName}).then((res) => {
+
+        if(res.data.success === false){
+          alert("Error while loading profile please try again")
+        }
+        else{
+          setUserInfo(res.data)
+          console.log(userInfo);
+          username = res.data.username
+          email = res.data.email
+          phonenumber = res.data.phone
+          firstName = res.data.full_name.split(" ")[0]
+          lastName = res.data.full_name.split(" ")[2]
+          password = res.data.password
+        }
+
+    })
+
+  }, [])
+
+  const handleSetting = () => {
+    // userInfoSetting = {
+    //   username: username,
+    //   email: email,
+    //   phonenumber: phonenumber,
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   password: password,
+    //   role: role
+    // }
+    navigate('/EditProfile')
+  }
   return (
     <div className="dashContent">
       <div className="overview">
@@ -71,7 +121,7 @@ const UserProfile = () => {
                                 id="input-username"
                                 className="form-control form-control-alternative"
                                 placeholder="Username"
-                                value="testInstructorUser"
+                                value={username}
                               />
                             </div>
                           </div>
@@ -90,7 +140,7 @@ const UserProfile = () => {
                                   fontSize: "large",
                                 }}
                               >
-                                Instructor
+                                {role}
                               </span>
                             </div>
                           </div>
@@ -109,7 +159,7 @@ const UserProfile = () => {
                                 id="input-first-name"
                                 className="form-control form-control-alternative"
                                 placeholder="First name"
-                                value=""
+                                value={firstName}
                               />
                             </div>
                             <div className="form-group focused">
@@ -166,7 +216,7 @@ const UserProfile = () => {
                                 id="input-email"
                                 className="form-control form-control-alternative"
                                 placeholder="hello@example.com"
-                                value=""
+                                value={email}
                               />
                             </div>
                           </div>
@@ -183,7 +233,7 @@ const UserProfile = () => {
                                 id="input-phone"
                                 className="form-control form-control-alternative"
                                 placeholder="+251 *********"
-                                value=""
+                                value={phonenumber}
                               />
                             </div>
                           </div>
@@ -192,11 +242,8 @@ const UserProfile = () => {
                       <hr className="my-4" />
                     </form>
                     <div className="editBtn">
-                      {" "}
-                      <NavLink to='/Settings' className="btn btn-warning btnForAll ">
-                        Edit
-                        
-                      </NavLink>
+                      {" "} 
+                        <button onClick={handleSetting}>Edit</button>
                     </div>
                   </div>
                 </div>
@@ -213,3 +260,4 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+export {userInfoSetting}

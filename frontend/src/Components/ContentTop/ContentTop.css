@@ -94,8 +94,8 @@
 
 .dropdown .dropbtn {
     position: fixed;
-    top: 1rem;
-    right: 15.5rem;
+    top: 2rem;
+    right: 23.5rem;
     font-size: 28px;
     border: none;
     cursor: pointer;
@@ -146,7 +146,7 @@
 .listcontent{
    position: fixed;
     top: 4.5rem;
-    right: 6rem;
+    right: 14rem;
     background-color: white;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -225,3 +225,15 @@ button{
     border-radius: 50%;
   }
   
+  .todobtn{
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    /* padding: 6px 8px; */
+    background-color: var(--dark-color);
+    /* background-color: inherit; */
+    margin: 0;
+    
+}
