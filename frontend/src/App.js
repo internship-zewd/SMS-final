@@ -198,7 +198,7 @@ function App() {
       />
 
         <Route
-          path="/Attendance/TakeAttendance"
+          path="/Attendance/AttendanceForm"
           element={
             localStorage.getItem("access-token") !== null &&
             localStorage.getItem("role") === "Admin"||"Instructor" ? (
@@ -324,7 +324,7 @@ function App() {
         />
   
         <Route
-          path="/Attendance/AttendanceForm"
+          path="/Settings"
           element={
             localStorage.getItem("access-token") !== null &&
             localStorage.getItem("role") === "Instructor" ? (
