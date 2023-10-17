@@ -75,12 +75,14 @@ function ContentTop({ click }) {
                 </li>
                 <li>
                   {" "}
-                  <NavLink>
+                  {/* <NavLink > */}
+                  <a href="">
                     <i className="uil uil-signout"></i>
                     <button className="logoutbtn" onClick={handleLogoutClick}>
                       <span>Logout</span>
                     </button>
-                  </NavLink>
+                    {/* </NavLink> */}
+                  </a>
                 </li>
               </div>
             </ul>
