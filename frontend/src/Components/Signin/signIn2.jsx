@@ -24,6 +24,7 @@ function SignIn2 () {
                     localStorage.setItem('username', username);
                     localStorage.setItem("access-token", res.data.accessToken);
                     localStorage.setItem("role", signInAs)
+                    localStorage.setItem('id_tag',res.data.user)
                     navigate("/dashboard");
                     console.log(localStorage.getItem("access-token"));
                 } else {

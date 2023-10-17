@@ -122,7 +122,7 @@ function AddSt() {
     }
     if (Object.keys(validationErrors).length === 0) {
       return await axios
-        .post("http://localhost:8081/student", {
+        .post("http://localhost:8081/student/create", {
           username,
           email,
           phonenumber,
@@ -244,8 +244,9 @@ function AddSt() {
                     }}
                     name="course"
                   >
+                    <option value="" selected="selected">Select Course</option>
                     {courseFetched.map((cors) => (
-                      <option value={cors.id}>{cors.name}</option>
+                      <option value={cors.id}>{cors.course_name}</option>
                     ))}
                   </select>
                   <div className="errors">

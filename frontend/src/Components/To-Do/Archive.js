@@ -14,20 +14,22 @@ function Archive() {
   const [newTask, setNewTask] = useState('');
   const [reminderinfo, setReminderinfo] = useState({});
   const [buttonPopup, setButtonPopup] = useState(false);
+  const username=localStorage.getItem('username')
+  console.log(username)
 
 
   const handleView=async(id)=>{
 
     return await axios.get(`http://localhost:8081/todo/getOne/${id}`)
     .then((res)=>{
-
+       
         const viewData=res.data
         console.log(viewData)
         setReminderinfo(viewData)      
         setButtonPopup(true) })}
 
         const getTasks=async()=>{
-             await axios.get(`http://localhost:8081/todo/getAll`)
+             await axios.get(`http://localhost:8081/todo/getAll/${username}`)
                         .then((res)=>{
                   let completed=[]
                   let incomplete=[]

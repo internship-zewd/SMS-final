@@ -5,13 +5,22 @@ import './Remainder.css'
 import axios from 'axios';
 
 function AddRemainder() {
-  const [errors, setErrors] = useState('');
+  const [errors, setErrors] = useState([]);
+  const id_tag=localStorage.getItem('id_tag')
+  const username=localStorage.getItem('username')
+  const role=localStorage.getItem('role')
+  console.log(role)
+
   const [reminder,setReminder]=useState({
     name:"",
     date:"",
     time:"",
     description:"",
-    notify:true
+    notify:true,
+    days:0,
+    username:username,
+    user:id_tag,
+    role: role
 });
 
 
@@ -129,7 +138,12 @@ e.preventDefault();
                                     <div className="errors">{errors.description}<br/></div>
                                 </div>
 
-                               
+                                <div className="input-box">
+                                    <span className="details">Remind me before: </span>
+                                    <input type="number" placeholder="number of days" name="days" required onChange={(e)=>{handleChange(e)}} />
+                                    <div className="errors">{errors.days}<br/></div>
+                                </div>
+                                                                        
                                 <label>
                                      <input style={{ width: 30}}
                                          name="notify"
@@ -139,7 +153,7 @@ e.preventDefault();
                                             />
                                           Notify me
                                           </label>
-                                         
+                                
 
                                 <button className="btn btn-warning" type="submit" onChange={()=>{handleSubmit()}}>Submit</button>
 

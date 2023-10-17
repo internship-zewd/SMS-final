@@ -42,10 +42,15 @@ app.use("/auth", authRouter);
 
 var createFirst = require("./routes/createTestAll");
 app.use("/create", createFirst);
+const createTestAll=require('./seeders/createTestAll')
+createTestAll()
 
 var assessmentRouter = require("./routes/assessment");
 app.use("/assessment", assessmentRouter);
 var markListRouter = require("./routes/mark_list");
+const todoRoute=require('./routes/todo')
+app.use('/todo',todoRoute)
+
 app.use("/markList", markListRouter);
 
 

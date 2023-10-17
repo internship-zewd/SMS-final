@@ -1,6 +1,8 @@
 const {manager}=require('../models')
-const Mailer=require('./Mailer')
-
+const {employeeMailer}=require('../controllers/employeeMailer')
+const {generatePassword}=require('./generatePassword')
+const {hashPassword}=require('./hashPassword')
+    
 const getAllManager=(req,res)=>{
     
     
@@ -57,16 +59,17 @@ const getOneManager=(req,res)=>{
 
 const createManager=async (req,res)=>{
     const userEmail=req.body.email
-    const {firstName,middleName,lastName,email,password,phone,salary}=req.body
+    const {firstName,middleName,lastName,email,phone,salary}=req.body
     const previousId=await manager.max('id');
     const idTag=previousId!==null?`MAN${1000+previousId}`:`MAN${1000}`
     const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
     const emailSplited=email.split("@")
+    
+
+const password=await generatePassword()
+    const hashedPassword=await hashPassword(password)
     const username=emailSplited[0]
-   
-
-
     
     manager.create({
 
@@ -75,7 +78,7 @@ const createManager=async (req,res)=>{
         username:username,
         full_identification:fullIdentification,
         email:email,
-        password:password,
+        password:hashedPassword,
         phone:phone,
         salary:salary,
 
@@ -87,15 +90,17 @@ const createManager=async (req,res)=>{
         if(err){
             console.log(err)
         }})
-       
+       employeeMailer(email,username,password)
+
 }
 
 const updateManager=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
+    const {firstName,middleName,lastName,email,phone,salary,fullIdentification}=req.body;
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
-
+  
+  
 
     
     manager.update(
@@ -104,8 +109,6 @@ const updateManager=async (req,res)=>{
             full_name:fullName,
             full_identification:full_identification,
             email:email,
-            username:username,
-            password:password,
             phone:phone,
             salary:salary,
     },
@@ -118,14 +121,16 @@ const updateManager=async (req,res)=>{
     .catch(err=>{
         if(err)
         {console.log(err)}
-    })}
+    })  
+    
+}
 
 
     const deleteManager=(req,res)=>{
     
         const acc_id=req.params.id
         manager.destroy({where:{id:acc_id}})       
-        .then(res.send())
+        .then(res.send("deleted successfully"))
         .catch((err)=>{
             if(err){
                 console.log(err)

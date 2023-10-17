@@ -1,19 +1,26 @@
 // import React from 'react'
 import "./ContentTop.css";
 
-// import  { useState } from 'react';
-import { NavLink } from "react-router-dom";
 
-import React, { useState, useContext } from "react";
+import axios from 'axios'
+// import  { useState } from 'react';
+import { NavLink,Link } from "react-router-dom";
+
+import React, { useState, useContext,useEffect} from "react";
 
 // import { AuthContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 
 import Profile from "../../resource/images/profile.png";
 
-function ContentTop({ click }) {
+function ContentTop(props) {
+  const {click}=props.click
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [notifs,setNotifs]=useState(false)
+  const [isVisible,setIsVisible]=useState(notifs)
+  const [isInvisible,setIsInvisible]=useState(!notifs)
+
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
@@ -34,6 +41,38 @@ function ContentTop({ click }) {
     localStorage.removeItem("username");
     navigate("/"); // Navigate to the desired route
   };
+
+
+  
+
+  const getNotification=async()=>{
+    await axios.get(`http://localhost:8081/todo/getDue`)
+    .then((res)=>{
+      console.log(res.data)
+      const todos=res.data
+      console.log(todos.length)
+      if (todos.length>0){setNotifs(true)}
+    else{
+      setNotifs(false)
+    }})
+    .catch((err)=>{
+      if(err){console.log(err)}
+    })
+      
+  
+  }
+  
+
+useEffect(()=>{
+  setIsVisible(notifs)
+  setIsInvisible(!notifs)
+  
+},[notifs])
+useEffect(()=>{
+  getNotification()
+},[notifs])
+  
+
 
   return (
     <div className="top">
@@ -90,8 +129,11 @@ function ContentTop({ click }) {
         )}
       </div>
 
-      <i className="uil uil-bell notify"></i>
-      <i className="uil uil-schedule toDo"></i>
+      {isVisible && <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><div class="notification-icon"><i class="uil uil-bell notify animated-bell"></i><span class="notification-dot"></span></div></Link></button> } 
+                
+                {isInvisible && <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><i className="uil uil-bell notify"></i></Link></button>}
+               
+                <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Archive"}} ><i className="uil uil-schedule toDo"></i></Link></button>
     </div>
   );
 }

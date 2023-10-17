@@ -5,8 +5,10 @@ const path = require('path');
 
 require('dotenv').config()
 
-function Mailer(email,title,message,attachment){
+function employeeMailer(email,username,password){
     console.log(email)
+    const message=`This is your username and password.<br?/> Username:${username}<br/>Password:${password}`
+    const subject="Your login info to zewd academy"
    const transporter=nodeMailer.createTransport({
     service:'gmail',
     secure:true,
@@ -20,19 +22,8 @@ function Mailer(email,title,message,attachment){
 const mailOptions={
     from:`Zewd Academy <jayaddisu@gmail.com>`,
     to:email,
-    subject:title,
+    subject:subject,
     text:message,
-    attachments:[attachment.map((attach)=>(
-
-        {
-            filename:attach.originalName,
-            content:attach.data,
-            path:file.path
-        
-        }
-    ))
-        
-    ],
 
 
 }
@@ -46,4 +37,4 @@ return("Mesage sent successfully")
 
 
 }
-module.exports= {Mailer}
+module.exports= {employeeMailer}

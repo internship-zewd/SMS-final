@@ -31,7 +31,7 @@ export const instructorSidebar = [
     subMenus: [
       {
         name: "Attendance Form",
-        to: "/Attendance/Attendance Form",
+        to: "/Attendance/AttendanceForm",
       },
     ],
   },

@@ -37,8 +37,17 @@ module.exports=(sequelize,DataTypes)=>{
             validate:{
                 notEmpty:true
             },
-
         },
+        
+           due:{
+                type:DataTypes.DATE,
+                allowNull:false,
+                validate:{
+                    notEmpty:true
+                },
+    
+            },
+        
         notify:{
             type:DataTypes.BOOLEAN,
             allowNull:false,
@@ -46,7 +55,14 @@ module.exports=(sequelize,DataTypes)=>{
                 notEmpty:true
             },
 
-        }
+        },
+        user:{
+            type:DataTypes.STRING,
+            allowNull:false,
+            validate:{
+                notEmpty:true
+            },
+        },
     },{
         tableName:"todo",
         freezeTableName:true,

@@ -1,5 +1,8 @@
 const {admin}=require('../models')
-const {Mailer}=require('./Mailer')
+const {employeeMailer}=require('./employeeMailer')
+const {generatePassword}=require('./generatePassword')
+const {hashPassword}=require('./hashPassword')
+
 
 const getAllAdmins=async(req, res) => {
     let adminValues=[]
@@ -44,7 +47,7 @@ console.log(value)
 
 }
 const createAdmin=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body
+    const {firstName,middleName,lastName,email,phone,salary}=req.body
     const fullName=firstName+" "+middleName+" "+lastName
   
     const previousId= await admin.max('id')
@@ -53,7 +56,8 @@ const fullIdentification=idTagValue+" "+fullName
 const emailSplited=email.split("@")
 const username=emailSplited[0]
 
-Mailer(email)
+    const password=await generatePassword()
+    const hashedPassword=await hashPassword(password)
     admin.create({
         
 
@@ -62,7 +66,7 @@ Mailer(email)
         full_name:fullName,
         full_identification:fullIdentification,
         email:email,
-        password:password,
+        password:hashedPassword,
         phone:phone,
         salary:salary,   
         
@@ -76,6 +80,7 @@ Mailer(email)
         if(err){
             console.log(err)
         }})
+        employeeMailer(email,username,password)
 }
 
 const updateAdmin=async(req,res)=>{
@@ -103,13 +108,15 @@ const updateAdmin=async(req,res)=>{
     .then(res.send())
     .catch(err=>{
         if(err){console.log(err)}
-})}
+})
+employeeMailer(email,username,password)
+}
 
 const deleteAdmin=async(req,res)=>{
     
     const admin_id=req.params.id
     await admin.destroy({where:{id:admin_id}})       
-    .then(res.send())
+    .then(res.send("deleted successfully"))
     .catch((err)=>{
 
         if(err){
