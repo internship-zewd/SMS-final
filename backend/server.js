@@ -12,7 +12,7 @@ const corsOptions={
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json());
-
+require('dotenv').config();
 
 const studentRoute=require('./routes/student')
 app.use('/student',studentRoute)
@@ -47,7 +47,11 @@ var assessmentRouter = require("./routes/assessment");
 app.use("/assessment", assessmentRouter);
 var markListRouter = require("./routes/mark_list");
 app.use("/markList", markListRouter);
+var profileRouter = require('./routes/profile');
+const { createTestAll } = require('./seeders/createTestAll');
+app.use("/profile", profileRouter)
 
+createTestAll()
 
 db.sequelize.sync({alter:true}).then((req)=>{
     app.listen(PORT,()=>{

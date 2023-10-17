@@ -277,8 +277,8 @@ function App() {
         <Route
           path="/Profile/ViewProfile"
           element={
-            localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Instructor" ? (
+            localStorage.getItem("access-token") !== null
+             ? (
               <ProfileDashboard />
             ) : (
               <Navigate to="/" />
@@ -289,8 +289,7 @@ function App() {
         <Route
           path="/Settings"
           element={
-            localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Instructor" ? (
+            localStorage.getItem("access-token") !== null ? (
               <SettingsDash />
             ) : (
               <Navigate to="/" />
