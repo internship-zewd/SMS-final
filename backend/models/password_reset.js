@@ -12,7 +12,7 @@ module.exports=(sequelize,DataTypes)=>{
             type: DataTypes.STRING,
         },
         email: {
-            type: DataTypes.STRINGS
+            type: DataTypes.STRING,
         }
 
     },
@@ -21,5 +21,5 @@ module.exports=(sequelize,DataTypes)=>{
         timestamps: false
     })
 
-    return 
+    return password_reset;
 }
