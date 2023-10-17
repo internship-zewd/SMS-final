@@ -50,7 +50,8 @@ async function createTestAll(req, res, next) {
       
             // Combine idTagValue and instructor name
             const fullInstructor = `${idTagValue} ${instructorName}`;
-      
+            const password = "testInstructor1"
+            const hashedPassword = await hashPassword(password)
             await instructor.create({
               full_name: instructorName,
               id_tag: idTagValue,
@@ -59,7 +60,7 @@ async function createTestAll(req, res, next) {
               email: "test@gmail.com",
               salary: 2000,
               phone: '+251939881190',
-              password: 'testInstructor1'
+              password: hashedPassword
       
             });
           }

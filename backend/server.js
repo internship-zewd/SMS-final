@@ -54,7 +54,6 @@ app.use("/markList", markListRouter);
 var profileRouter = require("./routes/profile");
 app.use("/profile", profileRouter);
 
-createTestAll();
 
 db.sequelize.sync({ alter: true }).then((req) => {
   app.listen(PORT, () => {
