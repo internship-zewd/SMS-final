@@ -1,20 +1,17 @@
 // import React from 'react'
-import './ContentTop.css'
+import "./ContentTop.css";
 
 // import  { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 
 // import { AuthContext } from '../../App';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
+import Profile from "../../resource/images/profile.png";
 
- import Profile from "../../resource/images/profile.png";
-
-
-
-function ContentTop({click}) {
+function ContentTop({ click }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -27,21 +24,16 @@ function ContentTop({click}) {
   };
 
   // const { handleLogout } = useContext(AuthContext);
-  
-  const navigate = useNavigate();
 
-  
+  const navigate = useNavigate();
 
   const handleLogoutClick = () => {
     console.log("button is clicked");
-    // handleLogout();
-    // navigate('/'); // Navigate to the desired route
-  };  
-
-
-
-
-
+    localStorage.removeItem("access-token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    navigate("/"); // Navigate to the desired route
+  };
 
   return (
     <div className="top">
@@ -55,14 +47,8 @@ function ContentTop({click}) {
       <div className="dropdown">
         <button className="dropbtn" onClick={handleButtonClick}>
           {/* <i className="uil uil-user profile"></i> */}
-          
-           
-              <img className='userProfile'
-                src={Profile}
-                
-                alt="User profile"
-              />
-          
+
+          <img className="userProfile" src={Profile} alt="User profile" />
         </button>
         {/* <div id="dropDownP" >
                            <a href="#"><i className="uil uil-user-square"></i>Profile</a>
@@ -89,9 +75,11 @@ function ContentTop({click}) {
                 </li>
                 <li>
                   {" "}
-                  <NavLink to="">
+                  <NavLink>
                     <i className="uil uil-signout"></i>
-                    <button onClick={handleLogoutClick}>Logout</button>
+                    <button className="logoutbtn" onClick={handleLogoutClick}>
+                      <span>Logout</span>
+                    </button>
                   </NavLink>
                 </li>
               </div>
@@ -106,17 +94,4 @@ function ContentTop({click}) {
   );
 }
 
-export default ContentTop
-
-
-
-
-
-
-
-
-
-
- 
-               
-             
+export default ContentTop;

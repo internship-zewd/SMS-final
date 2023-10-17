@@ -149,7 +149,7 @@ section .contentBx .formBx .forget button:hover{
   }
   
 @media (max-width: 900px){
-    .full_content{
+    .fullcontent{
         border: none;
         background: none;
     }

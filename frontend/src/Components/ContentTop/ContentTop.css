@@ -95,7 +95,7 @@
 .dropdown .dropbtn {
     position: fixed;
     top: 1rem;
-    right: 14.5rem;
+    right: 15.5rem;
     font-size: 28px;
     border: none;
     cursor: pointer;
@@ -108,7 +108,9 @@
     z-index: 999;
 }
 
-
+.logoutbtn{
+    font-size: 16;
+}
 
 
 
@@ -186,7 +188,7 @@
 
 
 .dropdown li a:hover i,
-.dropdown li a:hover span {
+.dropdown li a:hover span{
     color: var(--hover-color);
 }
 
@@ -199,7 +201,7 @@ button{
             cursor: pointer;
             outline: none;
            
-            padding: 6px 25px;
+            padding: 6px 0px;
             background-color: inherit;
             margin: 0;
             border-radius: 10px;
