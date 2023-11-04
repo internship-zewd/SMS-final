@@ -4,7 +4,7 @@ const { mark_list } = require('../models');
 const { student } = require('../models');
 
 const fetchSpecificClass = async (req, res) => {
-    const instUsername = req.username
+    const instUsername = req.body.username
 
     try {
         
@@ -16,7 +16,7 @@ const fetchSpecificClass = async (req, res) => {
         })
         const specificClass= await class_room.findAll({
             where: {
-                instructorId: instId.id
+                instructor_id: instId.id
             },
             attributes: ['fullIdentification']
         })
@@ -29,7 +29,7 @@ const fetchSpecificClass = async (req, res) => {
 }
 
 const studentMarkList = async (req, res) => {
-    const instUser = req.username
+    const instUser = req.body.username
     try {
   
       const findInstId = await instructor.findOne({
@@ -40,7 +40,7 @@ const studentMarkList = async (req, res) => {
       })
       const fetchAllGrade = await mark_list.findAll({
         where: {
-          instructorId: findInstId.id
+          instructor_id: findInstId.id
         },
         include: [{
           model: student, // Include the Student model

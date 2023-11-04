@@ -132,6 +132,7 @@ const deleteStudent=(req,res)=>{
                    student.classFullIdentification=className
                    studentsWithClass.push(stud.dataValues)
                console.log(stud)
+    
 
                 })
                 .catch((err)=>{if(err){console.log(err)}})

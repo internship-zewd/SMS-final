@@ -8,24 +8,27 @@ function MarkList() {
   const [selectedClass, setSelectedClass] = useState();
   const [classList, setClassList] = useState();
   const accessToken = localStorage.getItem("access-token");
+  let username
   let result = [];
   useEffect(() => {
-    axios
+     username = localStorage.getItem("username").then(axios
       .post("http://localhost:8081/markList/fetchSpecificClass", {
-        accessToken,
+        username
       })
       .then((res) => {
         if (res.data.success === false) {
           console.log("error fetching data");
         } else {
           setClassList(res.data);
+          console.log(classList);
         }
-      });
+      }))
+    
   }, []);
 
   const handleClassChange = () => {
     axios
-      .post("http://localhost:8081/markist/fetchMarkList", { selectedClass })
+      .post("http://localhost:8081/markList/fetchMarkList", { selectedClass, username })
       .then((res) => {
         if (res.data.success === false) {
           console.log("error fetching data");

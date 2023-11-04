@@ -289,7 +289,7 @@ function App() {
           }
         />
         <Route
-          path="/MarkList/MarkList"
+          path="/Marklist/CheckMarklist"
           element={
             localStorage.getItem("access-token") !== null &&
             localStorage.getItem("role") === "Instructor" ? (

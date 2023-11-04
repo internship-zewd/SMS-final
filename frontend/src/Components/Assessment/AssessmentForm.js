@@ -11,33 +11,25 @@ function AssessmentForm() {
   const [insertedValue, setInsertedValue] = useState("Exam(default)");
   const [selectedClass, setSelectedClass] = useState("");
   const [classList, setClassList] = useState([]);
-  const [outOf, setOutOf] = useState("");
+  const [ outOf, setOutOf] = useState('')
 
-  const username = localStorage.getItem("username");
-  const accessToken= localStorage.getItem("access-token");
-  console.log(username)
+  const username = localStorage.getItem("username") 
 
-  useEffect(() => { getClass() }, [username]);
-    const getClass=async()=>{
-      await axios
-        .post("http://localhost:8081/assessment/specificClass", { username,accessToken })
-        .then((res) => {
-          if (res.data.success === false) {
-            console.log("error fetching data");
-          } else {
-            setClassList(res.data);
-          }
-        });
-  
-    }
+  useEffect(() => {
+    axios.post("http://localhost:8081/assessment/specificClass", {username}).then((res) => {
+      if (res.data.success === false) {
+        console.log("error fetching data");
+      } else {
+        setClassList(res.data);
+      }
+    });
+  }, []);
 
-  const handleClassChange = async (e) => {
+  const handleClassChange = (e) => {
     e.preventDefault();
-    await axios
+    axios
       .post("http://localhost:8081/assessment/specificStudent", {
-        selectedClass,
-        outOf,
-        insertedValue,
+        selectedClass, outOf, insertedValue, username
       })
       .then((res) => {
         setStudentList(res.data);
@@ -50,44 +42,41 @@ function AssessmentForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const gradesToInsert = [];
+      const gradesToInsert = [];
 
-    studentList.forEach((student, index) => {
-      const grade = gradeInputs[index];
-      if (grade !== undefined) {
-        const gradeObject = {
-          studentName: student.full_identification,
-          assessmentName: insertedValue,
-          grade: grade,
-          className: selectedClass,
-        };
-        gradesToInsert.push(gradeObject);
-      } else {
-        const gradeObject = {
-          studentName: student.full_identification,
-          assessmentName: insertedValue,
-          grade: "0",
-          className: selectedClass,
-        };
-        gradesToInsert.push(gradeObject);
-      }
-    });
-
-    axios
-      .post("http://localhost:8081/assessment/insertGrade", {
-        gradesToInsert,
-        username,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          console.log("Grades inserted successfully");
-        } else if (res.data.success === false) {
-          console.log(res.data.message);
+      studentList.forEach((student, index) => {
+        const grade = gradeInputs[index];
+        if (grade !== undefined) {
+          const gradeObject = {
+            studentName: student.full_identification,
+            assessmentName: insertedValue,
+            grade: grade,
+            className: selectedClass,
+          };
+          gradesToInsert.push(gradeObject);
+        } else {
+          const gradeObject = {
+            studentName: student.full_identification,
+            assessmentName: insertedValue,
+            grade: "0",
+            className: selectedClass,
+          };
+          gradesToInsert.push(gradeObject);
         }
-      })
-      .catch((error) => {
-        console.error("Error inserting grades:", error);
       });
+
+      axios
+        .post("http://localhost:8081/register/insertGrade", { gradesToInsert })
+        .then((res) => {
+          if (res.data.success) {
+            console.log("Grades inserted successfully");
+          } else if (res.data.success === false) {
+            console.log(res.data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error inserting grades:", error);
+        });
   };
 
   const handleInputChange = (event) => {
@@ -95,8 +84,8 @@ function AssessmentForm() {
     setInsertedValue(value);
   };
   const handleOutOf = (e) => {
-    setOutOf(e.target.value);
-  };
+    setOutOf(e.target.value)
+  }
   const handleGradeChange = (event, studentIndex) => {
     const { value } = event.target;
     setGradeInputs((prevInputs) => ({
@@ -109,7 +98,7 @@ function AssessmentForm() {
     <div className="dashContent">
       <div className="overview">
         <div className="title">
-          <i class="uil uil-check-square"></i>
+          <i class="uil uil-file-alt"></i>
           <span className="text">Assessment/Assessment Form</span>
         </div>
       </div>
@@ -129,6 +118,7 @@ function AssessmentForm() {
                     type="text"
                     placeholder="Assessment Name"
                     onChange={handleInputChange}
+    
                   />
                   <div className="errors">{errors.AssessName}</div>
                 </div>
@@ -137,7 +127,7 @@ function AssessmentForm() {
               <div className="input-box">
                 <div className="gender-details">
                   <span className="details">Out of:</span>
-                  <input type="text" required onChange={handleOutOf} />
+                  <input type="text" required onChange={handleOutOf}/>
                   <div className="errors">{errors.OutOf}</div>
                 </div>
               </div>
@@ -181,7 +171,7 @@ function AssessmentForm() {
                 {studentList.map((student, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{student.full_identification}</td>
+                    <td>{student.fullIdentification}</td>
                     <td>
                       <input
                         type="text"
@@ -194,7 +184,10 @@ function AssessmentForm() {
                 ))}
               </tbody>
             </Table>
-            <button className="btn btn-warning button" type="submit">
+            <button
+              className="btn btn-warning button"
+              type="submit"
+            >
               Finish
             </button>
           </form>

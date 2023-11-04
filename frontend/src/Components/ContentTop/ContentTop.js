@@ -40,8 +40,8 @@ function ContentTop(props) {
     localStorage.removeItem("role");
     localStorage.removeItem("username");
     navigate("/"); // Navigate to the desired route
-    window.location.reload();
   };
+  
 
 
   

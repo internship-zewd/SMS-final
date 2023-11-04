@@ -22,7 +22,7 @@ function AddCl() {
     });
   }, []);
 
-  let handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let validationErrors = {};
     let regclassName = /^[a-zA-Z0-9]+(([',. -][a-zA-Z0-9])?[a-zA-Z0-9]*)*$/;
@@ -54,8 +54,7 @@ function AddCl() {
     if (Object.keys(validationErrors).length === 0) {
       alert("Class Added successfully!");
     }
-    if (Object.keys(validationErrors).length === 0) {
-      axios
+    axios
         .post("http://localhost:8081/class_room/create", {
           className,
           selectedInstructor,
@@ -68,9 +67,8 @@ function AddCl() {
         .catch((error) => {
           console.log(error);
         });
-    } else {
-      alert("try again");
-
+    if (Object.keys(validationErrors).length === 0) {
+      
       console.log(validationErrors);
     }
   };
@@ -81,7 +79,7 @@ function AddCl() {
   const handleCourseChange = (e) => {
     setSelectedCourse(e.target.value);
     axios
-      .put("http://localhost:8081/course/update", {
+      .get("http://localhost:8081/instructor/getAll", {
         selectedCourse,
       })
       .then((res) => {
@@ -159,9 +157,9 @@ function AddCl() {
                   {instructorList.map((instructorName, index) => (
                     <option
                       key={index}
-                      value={instructorName.fullIdentification}
+                      value={instructorName.full_identification}
                     >
-                      {instructorName.fullIdentification}
+                      {instructorName.full_identification}
                     </option>
                   ))}
                 </select>

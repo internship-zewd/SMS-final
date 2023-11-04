@@ -50,7 +50,7 @@ export const instructorSidebar = [
   {
     name: "Marklist",
     iconClassName: "uil uil-list-ol",
-    to: "/Marklist/ Check Marklist",
+    to: "/Marklist/CheckMarklist",
   },
   {
     name: "Grade Report",

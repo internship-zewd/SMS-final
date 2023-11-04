@@ -1,8 +1,7 @@
 const puppeteer = require("puppeteer");
-const { admin } = require("../models");
-const { course } = require("../models");
 
 const generatePDF = async (req, res) => {
+  console.log("we're in here");
   try {
     const { htmlContent } = req.body;
 

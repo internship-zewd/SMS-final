@@ -37,10 +37,10 @@ function AllSt() {
 
     const getStudent=async()=>{
       
-      await axios.get('http://localhost:8081/student/getAllAndClass')
+      await axios.get('http://localhost:8081/student/getAll')
       .then((res)=>{
         getClass()
-          console.log("this is all the studens"+res)
+          console.log("this is all the studens"+res.data)
           setData(res.data)
           
       })
@@ -120,7 +120,7 @@ function AllSt() {
 
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Course</th>
+                            {/* <th>Course</th> */}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -138,7 +138,7 @@ function AllSt() {
 
                                     <td>{item.full_name}</td>
                                     <td>{item.email}</td>
-                                    <td>{item.course}</td>
+                                    {/* <td>{item.course}</td> */}
                                     <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>
                                     <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id)}}><EditIcon/></button>
                                     <UpdatePopup trigger={updatePopup} setTrigger={setUpdatePopup} updateProp={studentinfo}/>
