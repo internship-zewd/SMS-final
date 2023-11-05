@@ -11,25 +11,30 @@ function AssessmentForm() {
   const [insertedValue, setInsertedValue] = useState("Exam(default)");
   const [selectedClass, setSelectedClass] = useState("");
   const [classList, setClassList] = useState([]);
-  const [ outOf, setOutOf] = useState('')
+  const [outOf, setOutOf] = useState("");
 
-  const username = localStorage.getItem("username") 
+  const username = localStorage.getItem("username");
 
   useEffect(() => {
-    axios.post("http://localhost:8081/assessment/specificClass", {username}).then((res) => {
-      if (res.data.success === false) {
-        console.log("error fetching data");
-      } else {
-        setClassList(res.data);
-      }
-    });
+    axios
+      .post("http://localhost:8081/assessment/specificClass", { username })
+      .then((res) => {
+        if (res.data.success === false) {
+          console.log("error fetching data");
+        } else {
+          setClassList(res.data);
+        }
+      });
   }, []);
 
   const handleClassChange = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:8081/assessment/specificStudent", {
-        selectedClass, outOf, insertedValue, username
+        selectedClass,
+        outOf,
+        insertedValue,
+        username,
       })
       .then((res) => {
         setStudentList(res.data);
@@ -42,41 +47,41 @@ function AssessmentForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      const gradesToInsert = [];
+    const gradesToInsert = [];
 
-      studentList.forEach((student, index) => {
-        const grade = gradeInputs[index];
-        if (grade !== undefined) {
-          const gradeObject = {
-            studentName: student.full_identification,
-            assessmentName: insertedValue,
-            grade: grade,
-            className: selectedClass,
-          };
-          gradesToInsert.push(gradeObject);
-        } else {
-          const gradeObject = {
-            studentName: student.full_identification,
-            assessmentName: insertedValue,
-            grade: "0",
-            className: selectedClass,
-          };
-          gradesToInsert.push(gradeObject);
+    studentList.forEach((student, index) => {
+      const grade = gradeInputs[index];
+      if (grade !== undefined) {
+        const gradeObject = {
+          studentName: student.full_identification,
+          assessmentName: insertedValue,
+          grade: grade,
+          className: selectedClass,
+        };
+        gradesToInsert.push(gradeObject);
+      } else {
+        const gradeObject = {
+          studentName: student.full_identification,
+          assessmentName: insertedValue,
+          grade: "0",
+          className: selectedClass,
+        };
+        gradesToInsert.push(gradeObject);
+      }
+    });
+
+    axios
+      .post("http://localhost:8081/register/insertGrade", { gradesToInsert })
+      .then((res) => {
+        if (res.data.success) {
+          console.log("Grades inserted successfully");
+        } else if (res.data.success === false) {
+          console.log(res.data.message);
         }
+      })
+      .catch((error) => {
+        console.error("Error inserting grades:", error);
       });
-
-      axios
-        .post("http://localhost:8081/register/insertGrade", { gradesToInsert })
-        .then((res) => {
-          if (res.data.success) {
-            console.log("Grades inserted successfully");
-          } else if (res.data.success === false) {
-            console.log(res.data.message);
-          }
-        })
-        .catch((error) => {
-          console.error("Error inserting grades:", error);
-        });
   };
 
   const handleInputChange = (event) => {
@@ -84,8 +89,8 @@ function AssessmentForm() {
     setInsertedValue(value);
   };
   const handleOutOf = (e) => {
-    setOutOf(e.target.value)
-  }
+    setOutOf(e.target.value);
+  };
   const handleGradeChange = (event, studentIndex) => {
     const { value } = event.target;
     setGradeInputs((prevInputs) => ({
@@ -118,7 +123,6 @@ function AssessmentForm() {
                     type="text"
                     placeholder="Assessment Name"
                     onChange={handleInputChange}
-    
                   />
                   <div className="errors">{errors.AssessName}</div>
                 </div>
@@ -127,7 +131,7 @@ function AssessmentForm() {
               <div className="input-box">
                 <div className="gender-details">
                   <span className="details">Out of:</span>
-                  <input type="text" required onChange={handleOutOf}/>
+                  <input type="text" required onChange={handleOutOf} />
                   <div className="errors">{errors.OutOf}</div>
                 </div>
               </div>
@@ -135,19 +139,31 @@ function AssessmentForm() {
               <div className="input-box">
                 <div className="gender-details">
                   <span className="details">Select class:</span>
-                  <select
-                    value={selectedClass}
-                    onChange={(e) => {
-                      setSelectedClass(e.target.value);
-                    }}
-                  >
-                    <option value="">Select</option>
-                    {classList.map((className, index) => (
-                      <option key={index} value={className.full_identification}>
-                        {className.full_identification}
-                      </option>
-                    ))}
-                  </select>
+                  {classList.length > 0 ? (
+                    <div className="input-box">
+                      <div className="gender-details">
+                        <span className="details">Select class:</span>
+                        <select
+                          value={selectedClass}
+                          onChange={(e) => {
+                            setSelectedClass(e.target.value);
+                          }}
+                        >
+                          <option value="">Select</option>
+                          {classList.map((className, index) => (
+                            <option
+                              key={index}
+                              value={className.full_identification}
+                            >
+                              {className.full_identification}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  ) : (
+                    <p>No classes available</p>
+                  )}
                 </div>
               </div>
 
@@ -158,39 +174,40 @@ function AssessmentForm() {
               />
             </div>
           </form>
-          <form onSubmit={handleSubmit}>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Students</th>
-                  <th>{insertedValue}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {studentList.map((student, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{student.fullIdentification}</td>
-                    <td>
-                      <input
-                        type="text"
-                        value={gradeInputs[index]}
-                        onChange={(event) => handleGradeChange(event, index)}
-                        pattern="^\d*\.?\d+$"
-                      />
-                    </td>
+          {studentList.length > 0 ? (
+            <form onSubmit={handleSubmit}>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Students</th>
+                    <th>{insertedValue}</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-            <button
-              className="btn btn-warning button"
-              type="submit"
-            >
-              Finish
-            </button>
-          </form>
+                </thead>
+                <tbody>
+                  {studentList.map((student, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{student.fullIdentification}</td>
+                      <td>
+                        <input
+                          type="text"
+                          value={gradeInputs[index]}
+                          onChange={(event) => handleGradeChange(event, index)}
+                          pattern="^\d*\.?\d+$"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+              <button className="btn btn-warning button" type="submit">
+                Finish
+              </button>
+            </form>
+          ) : (
+            <p>No data available</p>
+          )}
         </div>
       </div>
     </div>

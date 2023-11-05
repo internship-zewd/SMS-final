@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './signIn.css'
 import zewdlogo from '../../resource/images/logo2.jpg'
@@ -13,6 +13,13 @@ function SignIn2 () {
     const [username, setUsername] = useState("");
     const [isError, setIsError] = useState(false);
     const [msgError, setMsgError] = useState("");
+
+    useEffect(() => {
+        if(localStorage.getItem('username') !== null) {
+            navigate("/dashboard")
+        }
+    }, [])
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
