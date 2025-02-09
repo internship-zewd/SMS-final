@@ -1,0 +1,14 @@
+.empty-page {
+    text-align: center;
+}
+
+.sad-icon {
+    font-size: 100px;
+    margin-bottom: 16px;
+}
+
+.empty-message {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+}

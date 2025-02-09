@@ -8,6 +8,7 @@ import {UpdatePopup} from './UpdatePopup';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EmptyPage from '../EmptyPage';
 
 
 function AllSt() {
@@ -19,6 +20,8 @@ function AllSt() {
     const [updatePopup, setUpdatePopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [Class,setClass]=useState([])
+    const [empty,setEmpty]=useState(false)
+
 
     useEffect(() => {
         getStudent();
@@ -41,7 +44,17 @@ function AllSt() {
       .then((res)=>{
         getClass()
           console.log("this is all the studens"+res.data)
-          setData(res.data)
+          const studentsFetched=res.data
+           console.log(res.data)
+          setData(studentsFetched)
+          if (studentsFetched.length===0){
+            setEmpty(true)
+
+          }else{
+            setEmpty(false)
+
+          }
+          
           
       })
       .catch((err)=>{
@@ -93,8 +106,16 @@ function AllSt() {
       // e.preventDefault()
   
   await axios.delete(`http://localhost:8081/student/delete/${id}`)
-  .then((res)=>{console.log("deleted"+ res)
-  console.log(res)})
+  .then((res)=>{
+    
+    console.log("deleted"+ res)
+    console.log(res)
+    window.location.reload()
+})
+  .catch((err)=>{
+    if(err){console.log(err)}
+
+  })
   
   }
   
@@ -108,12 +129,19 @@ function AllSt() {
                     <i className="uil uil-graduation-cap"></i>
                     <span className="text">Studet/All Students</span>
                 </div>                           
+              
+                {empty&& <EmptyPage pageName="Student" />}
+
+                {!empty&& 
+                
+                <div>
                 <div className='input-box'>
-                    <form>
-                        <input type="text" placeholder="Search Students" onChange={(e) => { setSearch(e.target.value) }} name="search" value={search} />
-                    </form>
-                </div>
-                <br/>
+                <form>
+                    <input type="text" placeholder="Search Students" onChange={(e) => { setSearch(e.target.value) }} name="search" value={search} />
+                </form>
+            </div>
+            <br/>
+            
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -149,7 +177,8 @@ function AllSt() {
                             ))}
                     </tbody>
                 </Table>
-
+                </div>
+}
             </div>
 
 

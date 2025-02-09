@@ -107,22 +107,23 @@ useEffect(()=>{
                   </NavLink>
                 </li>
                 <li>
-                  {" "}
+                 
                   <NavLink to="/Settings">
                     <i className="uil uil-setting"></i>
                     <span>Setting</span>
                   </NavLink>
                 </li>
                 <li>
-                  {" "}
-                  {/* <NavLink > */}
+            
+                  <NavLink to="/" >
                   <a href="">
                     <i className="uil uil-signout"></i>
                     <button className="logoutbtn" onClick={handleLogoutClick}>
                       <span>Logout</span>
                     </button>
-                    {/* </NavLink> */}
-                  </a>
+                    </a>
+                    </NavLink>
+                  
                 </li>
               </div>
             </ul>

@@ -80,7 +80,7 @@ export const adminSidebar = [
       subMenus:[
         
           {
-            name:"Attendance Report", to:"/Report/Attendance"
+            name:"Attendance Report", to:"/Report/AttendanceReport"
           },
           {
             name:"Student Report Card", to:"/Report/ReportCard"

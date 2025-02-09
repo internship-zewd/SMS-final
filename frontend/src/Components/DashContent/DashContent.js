@@ -74,19 +74,19 @@ function DashContent() {
         },
       ];
 
-      useEffect(()=>{
-        getData()
-        },[])
+      // useEffect(()=>{
+      //   getData()
+      //   },[])
       
-        const getData=async(req,res)=>{
-await axios.get(`http://localhost:8081/instructor`)
-.then(console.log(res))
-.catch((err)=>{
-  if(err){
-    console.log(err)
-  }})
+//         const getData=async(req,res)=>{
+// await axios.get(`http://localhost:8081/instructor/getAll`)
+// .then(console.log(res))
+// .catch((err)=>{
+//   if(err){
+//     console.log(err)
+//   }})
       
-        }
+//         }
 
 
 
