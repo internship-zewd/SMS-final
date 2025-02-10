@@ -56,8 +56,10 @@ const due=moment(date).subtract(days,'days').toDate();
         due:due,
         user:user
     })
-    .then(
-        res.send()
+    .then((response)=>{
+        res.send(response)
+    }
+       
     )
     .catch((err)=>{
         if(err){
@@ -67,9 +69,9 @@ const due=moment(date).subtract(days,'days').toDate();
 
 const getAllReminders=async(req,res)=>{
     console.log('im here')
-   const {user}=req.params
 
-    await todo.findAll({where:{user:user}})
+
+    await todo.findAll()
     .then((todos)=>{
         console.log(todos)
         res.send(todos)

@@ -56,13 +56,13 @@ module.exports=(sequelize,DataTypes)=>{
             },
 
         },
-        user:{
-            type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                notEmpty:true
-            },
-        },
+        // user:{
+        //     type:DataTypes.STRING,
+        //     allowNull:false,
+        //     validate:{
+        //         notEmpty:true
+        //     },
+        // },
     },{
         tableName:"todo",
         freezeTableName:true,

@@ -15,15 +15,18 @@ function Manage() {
     const [reminderinfo, setReminderinfo] = useState({});
     const [updatePopup, setUpdatePopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
+    const [username,setUserName]=useState("")
+    const username_local=localStorage.getItem('username')
 
     useEffect(() => {
         getAllRemainders();
+        setUserName(username_local)
 
     }, [])
 
     const getAllRemainders=async()=>{
 
-      await api.get('todo/getAll')
+      await api.get(`todo/getAll/${username}`)
       .then((res)=>{
           console.log(res.data)
           setData(res.data)

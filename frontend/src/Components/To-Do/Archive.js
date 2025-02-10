@@ -14,8 +14,12 @@ function Archive() {
   const [newTask, setNewTask] = useState('');
   const [reminderinfo, setReminderinfo] = useState({});
   const [buttonPopup, setButtonPopup] = useState(false);
-  const username=localStorage.getItem('username')
-  console.log(username)
+  const [username,setUserName]=useState('')
+  const username_local=localStorage.getItem('username')
+
+  useEffect( 
+    setUserName(username_local)
+    ,[])
 
 
   const handleView=async(id)=>{
