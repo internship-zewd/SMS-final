@@ -3,7 +3,7 @@ import "../DashContent/DashContent.css";
 import api from "../../resource/api"
 
 function AddCl() {
-  const [className, setClassname] = useState("");
+  const [className, setClassName] = useState("");
   const [course, setCourse] = useState('');
   const [instructor, setInstructor] = useState('');
   const [errors,setErrors]=useState({});
@@ -18,6 +18,7 @@ function AddCl() {
         console.log("No courses assigned");
       } else {
         setCourseList(res.data);
+        console.log("This is teh courseList: ",res.data)
       }
     });
   }, []);
@@ -28,7 +29,7 @@ function AddCl() {
     let regclassName = /^[a-zA-Z0-9]+(([',. -][a-zA-Z0-9])?[a-zA-Z0-9]*)*$/;
 
     if (!regclassName.test(className)) {
-      validationErrors.className = "Class name";
+      validationErrors.className = "";
     } else if (className.length < 3) {
       validationErrors.className =
         "Class name is supposed to be atleast 3 characters";
@@ -53,9 +54,8 @@ function AddCl() {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       alert("Class Added successfully!");
-    }
-    api
-        .post("class_room/create", {
+  
+    return api.post("class_room/create", {
           className,
           selectedInstructor,
           selectedCourse,
@@ -67,9 +67,11 @@ function AddCl() {
         .catch((error) => {
           console.log(error);
         });
-    if (Object.keys(validationErrors).length === 0) {
+      }
+    if (Object.keys(validationErrors).length !== 0) {
       
       console.log(validationErrors);
+      alert('Try again')
     }
   };
   const handleInstructorChange = (e) => {
@@ -77,11 +79,12 @@ function AddCl() {
   };
 
   const handleCourseChange = (e) => {
-    setSelectedCourse(e.target.value);
+    setSelectedCourse(e.value);
+    setCourse(e.value)
+    const courseId=e.key
+    console.log("this is course ",e.value)
     api
-      .get("instructor/getAll", {
-        selectedCourse,
-      })
+      .get("instructor/getAll", {course})
       .then((res) => {
         if (res.data.success === false) {
           console.log("No instructor assigned");
@@ -110,9 +113,9 @@ function AddCl() {
                   type="text"
                   id="className"
                   required
-                  value={className}
+                  
                   onChange={(e) => {
-                    setClassname(e.target.value);
+                    setClassName(e.target.value);
                   }}
                   name="className"
                   placeholder="Enter Name of class"
@@ -129,12 +132,12 @@ function AddCl() {
                 <select
                   required
                   value={selectedCourse}
-                  onChange={handleCourseChange}
+                  onChange={(e)=>handleCourseChange(e.target)}
                   name="course"
                 >
-                  <option>Select Course</option>
+                  <option value="">Select Course</option>
                   {courseList.map((item) => (
-                    <option key={course.id} value={item.full_identification}>
+                    <option key={item.full_identification} value={item.full_identification}>
                       {item.full_identification}
                     </option>
                   ))}
