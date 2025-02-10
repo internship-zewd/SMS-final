@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../DashContent/DashContent.css";
 import "./AssessmentForm.css";
-import axios from "axios";
+import api from "../../resource/api"
 import { Table } from "react-bootstrap";
 
 function AssessmentForm() {
@@ -16,7 +16,7 @@ function AssessmentForm() {
   const username = localStorage.getItem("username");
 
   useEffect(() => {
-    axios
+    api
       .post("http://localhost:8081/assessment/specificClass", { username })
       .then((res) => {
         if (res.data.success === false) {
@@ -29,8 +29,8 @@ function AssessmentForm() {
 
   const handleClassChange = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8081/assessment/specificStudent", {
+    api
+      .post("assessment/specificStudent", {
         selectedClass,
         outOf,
         insertedValue,
@@ -70,8 +70,8 @@ function AssessmentForm() {
       }
     });
 
-    axios
-      .post("http://localhost:8081/register/insertGrade", { gradesToInsert })
+    api
+      .post("assesment/register/insertGrade", { gradesToInsert })
       .then((res) => {
         if (res.data.success) {
           console.log("Grades inserted successfully");
