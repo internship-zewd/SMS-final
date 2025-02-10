@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from "../../resource/api"
 import {
   AttendanceFormContainer,
   AttendanceFormTitle,
@@ -23,7 +23,7 @@ const AttendanceForm = () => {
     
 },[])
 const getData=async()=>{
-await axios.get(`http://localhost:8081/class_room/getAll`)
+await api.get(`class_room/getAll`)
     .then((res)=>{
     setClasses(res.data)
     console.log(res.data)
@@ -56,7 +56,7 @@ await axios.get(`http://localhost:8081/class_room/getAll`)
      const handleAttendance=async()=>{
          console.log(studentAttended)
          
-         await axios.post(`http://localhost:8081/attendance/create`,{studentAttended})
+         await api.post(`attendance/create`,{studentAttended})
          .then((res)=>{
             window.alert(`successfully added attendance for ${Classes[0].full_identification}`)
              
@@ -81,7 +81,7 @@ await axios.get(`http://localhost:8081/class_room/getAll`)
              setStudent([])
          }else{
              let instructorId=""
-             await axios.get(`http://localhost:8081/class_room/getOne/${id}`)
+             await api.get(`class_room/getOne/${id}`)
              .then((res)=>{
                  
                  instructorId=res.data.instructor_id
@@ -92,7 +92,7 @@ await axios.get(`http://localhost:8081/class_room/getAll`)
              .catch((err)=>{if(err){console.log(err)}})
             
              console.log(instructorId)
-             await axios.get(`http://localhost:8081/student/getByClass/${id}`)
+             await api.get(`student/getByClass/${id}`)
          .then((res)=>{
              let studentId=[]
              let studentInfo=[]

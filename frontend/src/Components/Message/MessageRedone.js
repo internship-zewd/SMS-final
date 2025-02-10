@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import api from "../../resource/api"
 import { useState } from "react";
 
 function SendMessage() {
@@ -27,8 +27,8 @@ function SendMessage() {
     formData.append("textBody", textBody)
     formData.append("selReceiversEmail", JSON.stringify(selReceiversEmail))
 
-    axios
-      .post("http://localhost:8081/message/sendEmail", formData, {
+    api
+      .post("message/sendEmail", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -44,8 +44,8 @@ function SendMessage() {
 
   const handleFetch = (e) => {
     setSendTo(e.target.value);
-    axios
-      .get("http://localhost:8081/message/fetchReceiver", { sendTo })
+    api
+      .get("message/fetchReceiver", { sendTo })
       .then((res) => {
         if (res.data.success === false) {
           console.log(res.data.msg);

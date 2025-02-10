@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import "../DashContent/DashContent.css";
-import axios from "axios";
+import api from "../../resource/api"
 
 function AddCl() {
   const [className, setClassname] = useState("");
@@ -13,7 +13,7 @@ function AddCl() {
   const [selectedCourse, setSelectedCourse] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8081/course/getAll").then((res) => {
+    api.get("course/getAll").then((res) => {
       if (res.data.success === false) {
         console.log("No courses assigned");
       } else {
@@ -54,8 +54,8 @@ function AddCl() {
     if (Object.keys(validationErrors).length === 0) {
       alert("Class Added successfully!");
     }
-    axios
-        .post("http://localhost:8081/class_room/create", {
+    api
+        .post("class_room/create", {
           className,
           selectedInstructor,
           selectedCourse,
@@ -78,8 +78,8 @@ function AddCl() {
 
   const handleCourseChange = (e) => {
     setSelectedCourse(e.target.value);
-    axios
-      .get("http://localhost:8081/instructor/getAll", {
+    api
+      .get("instructor/getAll", {
         selectedCourse,
       })
       .then((res) => {
@@ -152,8 +152,9 @@ function AddCl() {
                   value={selectedInstructor}
                   onChange={handleInstructorChange}
                   name="course"
+                  disabled={!selectedCourse}
                 >
-                  <option value="">Select Course</option>
+                  <option value="">Select Instructor</option>
                   {instructorList.map((instructorName, index) => (
                     <option
                       key={index}

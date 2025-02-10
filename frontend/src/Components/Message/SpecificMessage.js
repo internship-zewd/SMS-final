@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from "../../resource/api"
 import React,{useState} from 'react'
 import  {useLocation} from 'react-router-dom'
 
@@ -56,7 +56,7 @@ export const SpecificMessage=(props)=>{
     const handleSubmitSpecific=async(e)=>{
         console.log(emails)
         e.preventDefault()
-        await axios.post(`http://localhost:8081/message/specific`,formData,{headers:{'Content-Type':'multipart/form-data'},})
+        await api.post(`message/specific`,formData,{headers:{'Content-Type':'multipart/form-data'},})
         .then((res)=>{console.log(res)
         alert("message sent successfully")})
         .catch((err)=>{if(err){console.log(err)
@@ -124,7 +124,7 @@ export const SpecificMessage=(props)=>{
 
 
 // import React from "react";
-// import axios from "axios";
+// import api from "../../resource/api"
 // import { useState } from "react";
 
 // function SpecificMessage() {
@@ -152,8 +152,8 @@ export const SpecificMessage=(props)=>{
 //     formData.append("textBody", textBody)
 //     formData.append("selReceiversEmail", JSON.stringify(selReceiversEmail))
 
-//     axios
-//       .post("http://localhost:8081/message/sendEmail", formData, {
+//    api
+//       .post("message/sendEmail", formData, {
 //         headers: {
 //           'Content-Type': 'multipart/form-data',
 //         },
@@ -169,8 +169,8 @@ export const SpecificMessage=(props)=>{
 
 //   const handleFetch = (e) => {
 //     setSendTo(e.target.value);
-//     axios
-//       .get("http://localhost:8081/message/fetchReceiver", { sendTo })
+//     api
+//       .get("message/fetchReceiver", { sendTo })
 //       .then((res) => {
 //         if (res.data.success === false) {
 //           console.log(res.data.msg);

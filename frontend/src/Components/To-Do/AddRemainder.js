@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import '../DashContent/DashContent.css'
 import './Remainder.css'
-import axios from 'axios';
+import api from "../../resource/api"
 
 function AddRemainder() {
   const [errors, setErrors] = useState([]);
@@ -68,7 +68,7 @@ e.preventDefault();
       
           if (Object.keys(validationErrors).length === 0) {
             alert('Remainder Added Successfully!')
-        await axios.post(`http://localhost:8081/todo/create`,{reminder})
+        await api.post(`todo/create`,{reminder})
                   .then((res)=>{
                     console.log(res)
                     })

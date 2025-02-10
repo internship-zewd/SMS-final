@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../DashContent/DashContent.css'
 import './Addst.css'
 import { Table } from 'react-bootstrap';
-import axios from 'axios';
+import api from "../../resource/api"
 import {ViewPopup} from './ViewPopup';
 import {UpdatePopup} from './UpdatePopup';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -31,7 +31,7 @@ function AllSt() {
 
     const getClass=async()=>{
     
-        await axios.get(`http://localhost:8081/class_room/getAll`)
+        await api.get(`class_room/getAll`)
         .then((res)=>{console.log(res)})
         .catch((err)=>{if(err){console.log(err)}})
 
@@ -40,7 +40,7 @@ function AllSt() {
 
     const getStudent=async()=>{
       
-      await axios.get('http://localhost:8081/student/getAll')
+      await api.get('student/getAll')
       .then((res)=>{
         getClass()
           console.log("this is all the studens"+res.data)
@@ -64,7 +64,7 @@ function AllSt() {
   }
   const handleView=async(e,id)=>{
       // e.preventDefault();
-      return await axios.get(`http://localhost:8081/student/getOne/${id}`)
+      return await api.get(`getOne/${id}`)
       .then((response)=>{
   
           const viewData=response.data
@@ -86,7 +86,7 @@ function AllSt() {
   const handleUpdate=async(e,id)=>{
   
       // e.preventDefault(); 
-      await axios.get(`http://localhost:8081/student/update/${id}`)
+      await api.get(`student/update/${id}`)
       .then((response)=>{
           setStudentinfo(response.data)
           console.log(response.data)
@@ -105,7 +105,7 @@ function AllSt() {
   const handleDelete=async(e,id)=>{
       // e.preventDefault()
   
-  await axios.delete(`http://localhost:8081/student/delete/${id}`)
+  await api.delete(`student/delete/${id}`)
   .then((res)=>{
     
     console.log("deleted"+ res)

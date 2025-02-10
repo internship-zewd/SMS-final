@@ -19,7 +19,7 @@ function AdminDashContent() {
       .get("course/getAll")
       .then((res) => {
         const courses=res.data.length
-        console.log("Response data:", res.data.courses);
+        console.log("Response data:", res.data);
         if(courses>0){
           setCourseCount(courses)
         }else{
@@ -60,8 +60,8 @@ function AdminDashContent() {
     await api
       .get("student/getAll")
       .then((res) => {
-        const students=res.data.students.length
-        console.log("Response data:", res.data.students);
+        const students=res.data.length
+        console.log("Response data:", res.data);
         if(students>0){
           setStudentCount(students)
         }else{
@@ -70,7 +70,7 @@ function AdminDashContent() {
       })
       .catch((error) => {
         console.error(
-          "Error occurred while fetching the number of syudents:",
+          "Error occurred while fetching the number of students:",
           error
         );
       });

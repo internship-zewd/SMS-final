@@ -2,7 +2,7 @@
 import "./ContentTop.css";
 
 
-import axios from 'axios'
+import api from "../../resource/api"
 // import  { useState } from 'react';
 import { NavLink,Link } from "react-router-dom";
 
@@ -47,7 +47,7 @@ function ContentTop(props) {
   
 
   const getNotification=async()=>{
-    await axios.get(`http://localhost:8081/todo/getDue`)
+    await api.get(`todo/getDue`)
     .then((res)=>{
       console.log(res.data)
       const todos=res.data
@@ -79,10 +79,10 @@ useEffect(()=>{
     <div className="top">
       <i className="uil uil-bars sidebarToggle" onClick={click}></i>
 
-      <div className="searchBox">
+      {/* <div className="searchBox">
         <i className="uil uil-search"></i>
         <input type="text" placeholder="Search here..." />
-      </div>
+      </div> */}
 
       <div className="dropdown">
         <button className="dropbtn" onClick={handleButtonClick}>
@@ -90,11 +90,6 @@ useEffect(()=>{
 
           <img className="userProfile" src={Profile} alt="User profile" />
         </button>
-        {/* <div id="dropDownP" >
-                           <a href="#"><i className="uil uil-user-square"></i>Profile</a>
-                           <a href="#"><i className="uil uil-setting"></i>Setting</a>
-                           <a href="#"><i className="uil uil-signout"></i>Logout</a>
-                      </div> */}
 
         {isOpen && (
           <div className="droplist">
@@ -131,9 +126,16 @@ useEffect(()=>{
         )}
       </div>
 
-      {isVisible && <button className="todobtn"><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><div class="notification-icon"><i class="uil uil-bell notify animated-bell"></i><span class="notification-dot"></span></div></Link></button> } 
+      {isVisible &&
+       <button className="todobtn">
+        <Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} >
+        <div class="notification-icon">
+          <i class="uil uil-bell notify animated-bell"></i>
+          <span class="notification-dot"></span></div></Link>
+          </button> } 
                 
-                {isInvisible && <button className="todobtn"><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><i className="uil uil-bell notify"></i></Link></button>}
+                {isInvisible && <button className="todobtn">
+                  <Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><i className="uil uil-bell notify"></i></Link></button>}
                
                 <button className="todobtn"><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Archive"}} ><i className="uil uil-schedule toDo"></i></Link></button>
     </div>

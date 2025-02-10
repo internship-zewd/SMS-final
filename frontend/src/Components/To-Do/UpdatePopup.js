@@ -1,7 +1,7 @@
 import {useState,useEffect } from "react";
 import '../DashContent/DashContent.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import api from "../../resource/api"
 import './popup.css'
 
 export const UpdatePopup=(props)=>{
@@ -93,8 +93,8 @@ export const UpdatePopup=(props)=>{
             alert('Updated Successfully!')
             console.log(reminder.notify )
             
-        return await axios
-        .put(`http://localhost:8081/todo/updatePopup/${id}`,{reminder})
+        return await api
+        .put(`todo/updatePopup/${id}`,{reminder})
         .then((res)=>{console.log(res)
 
             setTrigger(false)

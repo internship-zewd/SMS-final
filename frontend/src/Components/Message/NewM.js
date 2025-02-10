@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import '../DashContent/DashContent.css'
 import './AddEm.css'
-import axios from 'axios';
+import api from "../../resource/api"
 import {Link,Route,Navigate,Routes} from "react-router-dom";
 import {Filter} from './Filter'
 import { Table } from 'react-bootstrap';
@@ -94,7 +94,7 @@ console.log(emails)
     }
     const fetchAll=async()=>{
     
-        await axios.get(`http://localhost:8081/message/getAll`)
+        await api.get(`message/getAll`)
         .then((res)=>{
             console.log(res.data)
             const data=res.data
@@ -136,7 +136,7 @@ console.log(emails)
         console.log("were hereeeeeee")
     
         e.preventDefault()
-        await axios.post(`http://localhost:8081/message/create/${type}`,formData,{headers:{'Content-Type':'multipart/form-data'},})
+        await api.post(`message/create/${type}`,formData,{headers:{'Content-Type':'multipart/form-data'},})
         .then((res)=>{console.log(res)
             alert("message sent successfully")})
             .catch((err)=>{if(err){console.log(err)

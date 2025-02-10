@@ -5,8 +5,7 @@ import { Table } from "react-bootstrap";
 import { ViewPopup } from "./ViewPopup";
 import { UpdatePopup } from "./UpdatePopup";
 import { useState, useEffect, useCallback, updateState } from "react";
-
-import axios from "axios";
+import api from "../../resource/api"
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -24,8 +23,8 @@ function AllCl() {
   }, []);
 
   const getClass = async () => {
-    await axios
-      .get("http://localhost:8081/class_room/getAll")
+    await api
+      .get("class_room/getAll")
       .then((res) => {
         setData(res.data);
       })
@@ -37,8 +36,8 @@ function AllCl() {
   };
   const handleView = async (e, id) => {
     // e.preventDefault();
-    return await axios
-      .get('http://localhost:8081/class_room/getOne/${id}')
+    return await api
+      .get('class_room/getOne/${id}')
       .then((response) => {
         const viewData = response.data;
 
@@ -55,8 +54,8 @@ function AllCl() {
   };
   const handleUpdate = async (e, id) => {
     // e.preventDefault();
-    await axios
-      .get('http://localhost:8081/class_room/getOne/${id}')
+    await api
+      .get('class_room/getOne/${id}')
       .then((response) => {
         setclassInfo(response.data);
         // console.log(response.data)
@@ -70,8 +69,8 @@ function AllCl() {
       });
   };
   const handleDelete = async (e, id) => {
-    await axios
-      .delete('http://localhost:8081/deleteInfo/deleteClass/${id}')
+    await api
+      .delete('deleteInfo/deleteClass/${id}')
       .then((res) => {
         console.log("deleted" + res);
         console.log(res);

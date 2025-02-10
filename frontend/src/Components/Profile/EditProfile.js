@@ -4,7 +4,7 @@ import '../DashContent/DashContent.css';
 import "./Profile.css";
 import Profile from "../../resource/images/profile.png";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import api from "../../resource/api"
 
 function EditProfile() {
 
@@ -25,7 +25,7 @@ function EditProfile() {
     let user = {}
     useEffect(() => {
 
-        axios.post("http://localhost:8081/profile/getProfile", {role, usernameName}).then((res) => {
+        api.post("profile/getProfile", {role, usernameName}).then((res) => {
     
             if(res.data.success === false){
               alert("Error while loading profile please try again")
@@ -51,7 +51,7 @@ function EditProfile() {
             phonenumber: newPhone
         }
 
-        axios.post('http://localhost:8081/profile/editProfile', {user, usernameName, role}).then((res) => {
+        api.post('profile/editProfile', {user, usernameName, role}).then((res) => {
             if (res.data.success === false) {
                 alert(res.data.msg)
             }

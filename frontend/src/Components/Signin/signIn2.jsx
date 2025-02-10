@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from "../../resource/api"
 import './signIn.css'
 import zewdlogo from '../../resource/images/logo2.jpg'
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +24,7 @@ function SignIn2 () {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(`your user is ${username}`);
-        axios.post('http://localhost:8081/auth/login', { username, password, signInAs })
+        api.post('auth/login', { username, password, signInAs })
             .then(function (res) {
                 console.log(res.data )
                 if (res.data.success) {

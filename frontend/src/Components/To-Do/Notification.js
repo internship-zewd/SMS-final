@@ -1,7 +1,6 @@
 import {useState,useEffect } from 'react'
 import { ViewPopup } from './ViewPopup'
-
-import axios from 'axios'
+import api from "../../resource/api"
 export const Notification=(props)=>{
     
         const [notifs,setNotifs]=useState([])
@@ -13,7 +12,7 @@ export const Notification=(props)=>{
 
         const handleView=async(id)=>{
 
-          return await axios.get(`http://localhost:8081/todo/getOne/${id}`)
+          return await api.get(`todo/getOne/${id}`)
           .then((res)=>{
              
               const viewData=res.data
@@ -25,7 +24,7 @@ export const Notification=(props)=>{
         const handleCompleteTask = async(id) => {
           const status=true
       
-          await axios.put(`http://localhost:8081/todo/update/${id}`,{status})
+          await api.put(`todo/update/${id}`,{status})
           .then((res)=>{
             
             console.log(res)
@@ -41,7 +40,7 @@ export const Notification=(props)=>{
 
 
       const getNotification=async()=>{
-        await axios.get(`http://localhost:8081/todo/getDue`)
+        await api.get(`todo/getDue`)
         .then((res)=>{
           console.log(res.data)
           const todos=res.data

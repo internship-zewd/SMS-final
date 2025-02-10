@@ -1,6 +1,6 @@
 // import './Popup.css';
 import React, { useRef } from "react";
-import axios from 'axios';
+import api from "../../resource/api"
 export const ViewPopup=(props)=> {
    
   const popupRef = useRef();
@@ -15,8 +15,8 @@ export const ViewPopup=(props)=> {
      const element = popupRef.current;
      const htmlContent = element.innerHTML;
 
-     const response = await axios.post(
-       "http://localhost:8081/course/generatePdf",
+     const response = await api.post(
+       "course/generatePdf",
        { htmlContent },
        {
          responseType: "blob",

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../DashContent/DashContent.css";
 import validator from "validator";
 import "./Addst.css";
-import axios from "axios";
+import api from "../../resource/api"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function AddSt() {
@@ -26,8 +26,8 @@ function AddSt() {
   }, []);
 
   const getCourse = async () => {
-    await axios
-      .get("http://localhost:8081/course/getAll")
+    await api
+      .get("course/getAll")
       .then((res) => {
         console.log(res.data);
         setCourseFetched(res.data);
@@ -42,8 +42,8 @@ function AddSt() {
   const getClass = async (id) => {
     console.log("Im in here");
     console.log(id);
-    await axios
-      .get(`http://localhost:8081/class_room/getByCourse/${id}`)
+    await api
+      .get(`class_room/getByCourse/${id}`)
       .then((res) => {
         setClassFetched(res.data);
         console.log(res.data);
@@ -122,8 +122,8 @@ function AddSt() {
       alert("Registered Successfully!");
     }
     if (Object.keys(validationErrors).length === 0) {
-      return await axios
-        .post("http://localhost:8081/student/create", {
+      return await api
+        .post("student/create", {
           username,
           email,
           phonenumber,

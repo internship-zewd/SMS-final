@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import '../DashContent/DashContent.css';
 import {Table} from 'react-bootstrap';
-import axios from 'axios';
+import api from "../../resource/api"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,7 +23,7 @@ function Manage() {
 
     const getAllRemainders=async()=>{
 
-      await axios.get('http://localhost:8081/todo/getAll')
+      await api.get('todo/getAll')
       .then((res)=>{
           console.log(res.data)
           setData(res.data)
@@ -36,7 +36,7 @@ function Manage() {
   }
   const handleView=async(e,id)=>{
       e.preventDefault();
-      return await axios.get(`http://localhost:8081/todo/getOne/${id}`)
+      return await api.get(`todo/getOne/${id}`)
       .then((res)=>{
   
           const viewData=res.data
@@ -59,7 +59,7 @@ function Manage() {
   const handleUpdate=async(e,id)=>{
   
       // e.preventDefault(); 
-      await axios.get(`http://localhost:8081/todo/getOne/${id}`)
+      await api.get(`todo/getOne/${id}`)
       .then((response)=>{
           setReminderinfo(response.data)
           console.log(response.data)
@@ -77,7 +77,7 @@ function Manage() {
   const handleDelete=async(e,id)=>{
       // e.preventDefault()
   
-  await axios.delete(`http://localhost:8081/todo/delete/${id}`)
+  await api.delete(`todo/delete/${id}`)
   .then((res)=>{
     console.log("deleted"+ res)
     console.log(res)

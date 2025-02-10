@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../DashContent/DashContent.css";
-import axios from "axios";
+import api from "../../resource/api"
 import validator from "validator";
 function AddCo() {
   const [courseName, setCoursename] = useState("");
@@ -39,8 +39,8 @@ function AddCo() {
         }
         if(Object.keys(validationErrors).length===0){
 
-        return await axios
-        .post("http://localhost:8081/course/create",{courseName,fee,duration})
+        return await api
+        .post("course/create",{courseName,fee,duration})
         .then((res)=>{console.log(res)})
         .catch((err)=>{
             if(err){
@@ -82,8 +82,8 @@ function AddCo() {
       alert("Course Added successfully!");
     }
     if (Object.keys(validationErrors).length === 0) {
-      return await axios
-        .post("http://localhost:8081/course/create", {
+      return await api
+        .post("course/create", {
           courseName,
           fee,
           duration,

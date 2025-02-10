@@ -4,7 +4,7 @@ import './signIn.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import zewdlogo from '../../resource/images/logo2.jpg';
-import axios from 'axios';
+import api from "../../resource/api"
 
 function ForgotPasswordForm() {
     const [email, setEmail] = useState('');
@@ -37,7 +37,7 @@ function ForgotPasswordForm() {
             return;
         }
         else {
-            axios.post("http://localhost/8081/auth/forgotPassword", {role, email}).then((res) => {
+            api.post("auth/forgotPassword", {role, email}).then((res) => {
                 if(res.data.success === false) {
                     alert(res.data.msg)
                 }

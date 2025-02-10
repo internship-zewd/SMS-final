@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../resource/api"
 import { Table } from "react-bootstrap";
 import "../DashContent/DashContent.css";
 
@@ -11,8 +11,9 @@ function MarkList() {
   let username
   let result = [];
   useEffect(() => {
-     username = localStorage.getItem("username").then(axios
-      .post("http://localhost:8081/markList/fetchSpecificClass", {
+     username = localStorage.getItem("username").then(
+      api
+      .post("markList/fetchSpecificClass", {
         username
       })
       .then((res) => {
@@ -27,8 +28,8 @@ function MarkList() {
   }, []);
 
   const handleClassChange = () => {
-    axios
-      .post("http://localhost:8081/markList/fetchMarkList", { selectedClass, username })
+    api
+      .post("markList/fetchMarkList", { selectedClass, username })
       .then((res) => {
         if (res.data.success === false) {
           console.log("error fetching data");

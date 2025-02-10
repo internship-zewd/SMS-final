@@ -235,5 +235,10 @@ button{
     background-color: var(--dark-color);
     /* background-color: inherit; */
     margin: 0;
+    border-radius: 10%;
+    height:100%;
+    width:4%;
+    text-align:center;
+
     
 }

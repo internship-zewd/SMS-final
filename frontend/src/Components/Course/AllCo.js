@@ -5,8 +5,7 @@ import { Table } from 'react-bootstrap';
 import {ViewPopup} from './ViewPopup';
 import {UpdatePopup} from './UpdatePopup'
 import {useState,useEffect,useCallback,updateState} from 'react';
-
-import axios from 'axios'
+import api from "../../resource/api"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -28,7 +27,7 @@ function AllCo() {
     
     const getCourse=async()=>{
     
-        await axios.get('http://localhost:8081/course/getAll')
+        await api.get('course/getAll')
         .then((res)=>{
             
             setData(res.data)
@@ -41,7 +40,7 @@ function AllCo() {
     }
     const handleView=async(e,id)=>{
         // e.preventDefault();
-        return await axios.get(`http://localhost:8081/course/getOne/${id}`)
+        return await api.get(`course/getOne/${id}`)
         .then((response)=>{
     
             const viewData=response.data
@@ -63,7 +62,7 @@ function AllCo() {
     const handleUpdate=async(e,id)=>{
     
         // e.preventDefault(); 
-        await axios.get(`http://localhost:8081/course/update/${id}`)
+        await api.get(`course/update/${id}`)
         .then((response)=>{
             setCourseInfo(response.data)
             // console.log(response.data)
@@ -81,7 +80,7 @@ function AllCo() {
     }
     const handleDelete=async(e,id)=>{
            
-    await axios.delete(`http://localhost:8081/course/delete/${id}`)
+    await api.delete(`course/delete/${id}`)
     .then((res)=>{console.log("deleted"+ res)
     console.log(res)})
     window.location.reload()

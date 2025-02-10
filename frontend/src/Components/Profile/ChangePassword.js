@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../../resource/api"
 import React, { useState } from "react";
 
 function ChangePassword() {
@@ -10,7 +10,7 @@ function ChangePassword() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8081/profile/changePassword", {oldPassword, newPassword, username, role}).then((res => {
+        api.post("profile/changePassword", {oldPassword, newPassword, username, role}).then((res => {
             if(res.data.success === false){
                 alert(res.data.msg)
             }

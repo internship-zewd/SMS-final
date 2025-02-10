@@ -1,7 +1,7 @@
 import React from 'react'
 // import './DashContent.css'
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../resource/api"
 import {
  BarChart, Bar, Cell, XAxis, YAxis, 
  CartesianGrid, Tooltip, 
@@ -79,7 +79,7 @@ function DashContent() {
       //   },[])
       
 //         const getData=async(req,res)=>{
-// await axios.get(`http://localhost:8081/instructor/getAll`)
+// await api.get(`instructor/getAll`)
 // .then(console.log(res))
 // .catch((err)=>{
 //   if(err){

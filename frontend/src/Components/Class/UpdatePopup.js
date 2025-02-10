@@ -1,7 +1,7 @@
 import '../DashContent/DashContent.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import api from "../../resource/api"
 
 export const UpdatePopup = (props) => {
 
@@ -47,7 +47,7 @@ useEffect(()=>{
   // }, [updateProp]);
 
   const getCourses = async () => {
-    await axios.get(`http://localhost:8081/course/getAll`)
+    await api.get(`course/getAll`)
       .then((res) => {
         setCourseList(res.data);
       }).catch((err) => {
@@ -58,7 +58,7 @@ useEffect(()=>{
   };
 
   const getInstructors = async () => {
-    await axios.get(`http://localhost:8081/instructor/getAll`)
+    await api.get(`instructor/getAll`)
       .then((res) => {
         setInstructorList(res.data);
       }).catch((err) => {
@@ -72,7 +72,7 @@ useEffect(()=>{
     e.preventDefault();
 
     console.log("im in here ");
-    await axios.put(`http://localhost:8081/class_room/update/${id}`, { className, instructorName, courseName, finalName,id_tag })
+    await api.put(`class_room/update/${id}`, { className, instructorName, courseName, finalName,id_tag })
       .then((res) => {
         alert(res.data);
         console.log(res.data);

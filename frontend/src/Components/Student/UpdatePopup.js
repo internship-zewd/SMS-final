@@ -1,8 +1,7 @@
 import {useState} from "react";
 import '../DashContent/DashContent.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import axios from 'axios';
+import api from "../../resource/api"
 
 
 
@@ -30,8 +29,8 @@ export const UpdatePopup=(props)=>{
 const handleSubmit = async(e) => {
   //  e.preventDefault();
    
-    return await axios
-    .post("http://localhost:8081/student",{username,email,phonenumber,gender,paymentStatus,addmitiondate,course,classs,dob,registno})
+    return await api
+    .post(`student/update/${id}`,{username,email,phonenumber,gender,paymentStatus,addmitiondate,course,classs,dob,registno})
     .then((res)=>{
         console.log(res.data)
     })

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom'
-import axios from 'axios';
+
 import '../DashContent/DashContent.css';
 import "./Profile.css";
 import Profile from "../../resource/images/profile.png";
 import { NavLink } from "react-router-dom";
+import api from "../../resource/api"
 
 let username = null
 let email= null
@@ -23,7 +24,7 @@ function UserProfile () {
 
   useEffect(() => {
 
-    axios.post("http://localhost:8081/profile/getProfile", {role, usernameName}).then((res) => {
+    api.post("profile/getProfile", {role, usernameName}).then((res) => {
 
         if(res.data.success === false){
           alert("Error while loading profile please try again")

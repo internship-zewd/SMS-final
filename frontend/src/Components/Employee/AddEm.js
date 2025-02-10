@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../DashContent/DashContent.css'
-import axios from 'axios';
+import api from "../../resource/api"
 import "./AddEm.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import validator from 'validator';
@@ -82,8 +82,8 @@ function  AddEm () {
        
         if(Object.keys(validationErrors).length===0){
 
-        return await axios
-        .post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary})
+        return await api
+        .post(`${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary})
         .then((res)=>{alert(res.data)})
         .catch((err)=>{
             if(err){

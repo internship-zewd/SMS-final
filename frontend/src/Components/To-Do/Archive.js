@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import '../DashContent/DashContent.css';
 import './Archive.css';
-import axios from 'axios';
+import api from "../../resource/api"
 import {ViewPopup} from './ViewPopup';
 
 
@@ -20,7 +20,7 @@ function Archive() {
 
   const handleView=async(id)=>{
 
-    return await axios.get(`http://localhost:8081/todo/getOne/${id}`)
+    return await api.get(`todo/getOne/${id}`)
     .then((res)=>{
        
         const viewData=res.data
@@ -29,7 +29,7 @@ function Archive() {
         setButtonPopup(true) })}
 
         const getTasks=async()=>{
-             await axios.get(`http://localhost:8081/todo/getAll/${username}`)
+             await api.get(`todo/getAll/${username}`)
                         .then((res)=>{
                   let completed=[]
                   let incomplete=[]
@@ -65,7 +65,7 @@ function Archive() {
   const handleCompleteTask = async(id) => {
     const status=true
 
-    await axios.put(`http://localhost:8081/todo/update/${id}`,{status})
+    await api.put(`todo/update/${id}`,{status})
     .then((res)=>{
       
       console.log(res)

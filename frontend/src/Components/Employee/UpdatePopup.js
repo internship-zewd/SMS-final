@@ -2,7 +2,7 @@ import '../DashContent/DashContent.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import "../../css/Popup.css";
 import {useState,useEffect} from "react";
-import axios from 'axios';
+import api from "../../resource/api"
 
 
 
@@ -67,7 +67,7 @@ console.log(email+_email)
     if (employeeType===employee_type){
 
         console.log("im in here ")
-        await axios.put(`http://localhost:8081/${employee_type}/update/${id}`,{firstName,middleName,lastName,email,password,phone,salary,fullIdentification} )
+        await api.put(`${employee_type}/update/${id}`,{firstName,middleName,lastName,email,password,phone,salary,fullIdentification} )
         .then((res)=>{
             alert(res.data)
             setTrigger(false)
@@ -83,7 +83,7 @@ console.log(email+_email)
         }
         else{
             console.log(employeeType)
-         await axios.post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,username} )
+         await api.post(`${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,username} )
     .then((res)=>{
 
         alert(res.data)
@@ -97,7 +97,7 @@ console.log(email+_email)
         }
     })
     
-        await axios.delete(`http://localhost:8081/${updateProp.employee_type}/delete/${id}`)
+        await api.delete(`${updateProp.employee_type}/delete/${id}`)
         .then((res)=>{
             
             setTrigger(false)

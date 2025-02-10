@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import {useState, useRef} from 'react';
-import axios from 'axios';
+import api from "../../resource/api"
 import './signIn.css';
 import zewdlogo from '../../resource/images/logo2.jpg';
 
@@ -18,7 +18,7 @@ function ResetPasswordForm() {
   
       try {
         console.log(token.current);
-        await axios.post('http://localhost:8081/auth/resetPassword', {
+        await api.post('auth/resetPassword', {
           newPassword: newPassword, token: token
         }).then(function(res){
             if(res.data.success){

@@ -7,7 +7,7 @@ import {ViewPopup} from './ViewPopup';
 import {UpdatePopup} from './UpdatePopup'
 import {useState,useEffect,useCallback,updateState} from 'react';
 import {Filter} from "./Filter";
-import axios from 'axios'
+import api from "../../resource/api"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -36,14 +36,14 @@ function AllEm() {
        },[])
        const getAllEmployees=async()=>{
         
-        const instructor=await axios.get('http://localhost:8081/instructor/getAll')
-        const admin=await axios.get('http://localhost:8081/admin/getAll')
-        const manager=await axios.get('http://localhost:8081/manager/getAll')
-        const accountant=await axios.get('http://localhost:8081/accountant/getAll')
+        const instructor=await api.get('instructor/getAll')
+        const admin=await api.get('admin/getAll')
+        const manager=await api.get('manager/getAll')
+        const accountant=await api.get('accountant/getAll')
 
-        await axios.all([instructor,admin,manager,accountant])
+        await api.all([instructor,admin,manager,accountant])
         .then( 
-           axios.spread((...allData)=>{
+           api.spread((...allData)=>{
             const instructor=allData[0].data
             const admin=allData[1].data
             const manager=allData[2].data
@@ -83,7 +83,7 @@ function AllEm() {
     const handleView=async(e,id,employee)=>{
         // e.preventDefault();
         console.log(employeeInfo)
-        return await axios.get(`http://localhost:8081/${employee}/getOne/${id}`)
+        return await api.get(`${employee}/getOne/${id}`)
         .then((response)=>{
     
             const viewData=response.data
@@ -104,7 +104,7 @@ function AllEm() {
     const handleUpdate=async(e,id,employee)=>{
     
         
-        await axios.get(`http://localhost:8081/${employee}/getOne/${id}`)
+        await api.get(`${employee}/getOne/${id}`)
         .then((response)=>{
             setEmployeeInfo(response.data)
             console.log(response.data)
@@ -125,18 +125,18 @@ function AllEm() {
 
            e.preventDefault()
     let user=""
-    await axios.get(`http://localhost:8081/${employee}/getOne/${id}`)
+    await api.get(`${employee}/getOne/${id}`)
     .then((res)=>{
     user =res.data.id_tag
     }).catch((err)=>{if(err){console.log(err)}})
 
 
-    await axios.delete(`http://localhost:8081/todo/deleteTodoEmployee/${user}`)
+    await api.delete(`todo/deleteTodoEmployee/${user}`)
     .then((res)=>{alert(res.data)})
     .catch((err)=>{if(err){console.log(err)}})
 
 
-     await axios.delete(`http://localhost:8081/${employee}/delete/${id}`)
+     await api.delete(`${employee}/delete/${id}`)
     .then((res)=>{console.log("deleted"+ res)})
     .catch((err)=>{if(err){console.log(err)}})
     // window.location.reload()

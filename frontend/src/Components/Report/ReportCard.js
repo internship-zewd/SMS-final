@@ -5,7 +5,7 @@ import { Table } from 'react-bootstrap';
 import {ViewPopup} from './ViewPopup';
 import VisibilityIcon from '@mui/icons-material/Visibility'
 // import './Report.css';
-import axios from 'axios'
+import api from "../../resource/api"
 function ReportCard() {
     const[classFetched,  setClassFetched]=useState([]);
     const[classs, setClasss] = useState ([]);
@@ -21,7 +21,7 @@ function ReportCard() {
 
   const getStudent=async(class_id)=>{
     console.log(class_id)
-    await axios.get(`http://localhost:8081/student/getByClass/${class_id}`)
+    await api.get(`student/getByClass/${class_id}`)
     .then((res)=>{
         console.log(res.data)
         setStudents(res.data)
@@ -37,7 +37,7 @@ function ReportCard() {
 const handleView=async(e,id)=>{
     e.preventDefault()
 
-    return await axios.get(`http://localhost:8081/marklist/getOne/${id}`)
+    return await api.get(`marklist/getOne/${id}`)
     .then((response)=>{
         const viewData=response.data
         setStudentinfo(viewData)
@@ -52,7 +52,7 @@ const handleView=async(e,id)=>{
 
 
 const getClassAll=async()=>{
-    await axios.get("http://localhost:8081/class_room/getAll ")
+    await api.get("class_room/getAll ")
     .then((res)=>{
         setClassFetched(res.data)
     })
