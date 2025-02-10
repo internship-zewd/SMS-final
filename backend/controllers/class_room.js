@@ -86,9 +86,38 @@ const createClass = async (req, res) => {
     }
 }
 
+
+const updateClass = (req, res) => {
+    const { className, instructorName, courseName,id_tag} = req.body;
+    const identification=fullIdentification.split(" ")
+    fullIdentification=identification[0]+" "+courseName
+    
+    class_room.update(
+        {
+          class_name: className,
+          courseName: courseName,
+          instructorName:instructorName,
+          full_Identification:fullIdentification
+  
+        },
+  
+        { where: { id: req.params.id } }
+      )
+      .then((course) => {
+        console.log(course);
+        console.log(req.params.id);
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+  };
+
 module.exports={
     getAllClass,
     getOneClass,
     getByCourse,
-    createClass
+    createClass,
+    updateClass,
 }

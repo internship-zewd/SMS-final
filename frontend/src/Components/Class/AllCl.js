@@ -15,8 +15,11 @@ function AllCl() {
   const [data, setData] = useState([]);
   const [error, setError] = useState({});
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [classInfo, setclassInfo] = useState({});
-  const [updatePopup, setUpdatePopup] = useState(false);
+  const [buttonUpdatePopup, setButtonUpdatePopup] = useState(false);
+  const [classInfo,setClassInfo]=useState({});
+  // const [classInfo, setClassInfo] = useState([]);
+  // const [updatePopup, setUpdatePopup] = useState(false);
+ 
 
   useEffect(() => {
     getClass();
@@ -37,13 +40,13 @@ function AllCl() {
   const handleView = async (e, id) => {
     // e.preventDefault();
     return await api
-      .get('class_room/getOne/${id}')
+      .get(`class_room/getOne/${id}`)
       .then((response) => {
         const viewData = response.data;
-
-        setclassInfo(viewData);
+        setClassInfo(viewData)
         // console.log(response.data)
-        console.log(classInfo);
+        console.log('This is classInfo: ',viewData)
+        console.log(viewData);
         setButtonPopup(true);
       })
       .catch((err) => {
@@ -55,12 +58,12 @@ function AllCl() {
   const handleUpdate = async (e, id) => {
     // e.preventDefault();
     await api
-      .get('class_room/getOne/${id}')
+      .get(`class_room/getOne/${id}`)
       .then((response) => {
-        setclassInfo(response.data);
+      setClassInfo(response.data)
         // console.log(response.data)
-        console.log(classInfo.name);
-        setUpdatePopup(true);
+        console.log(response.data.name);
+        setButtonUpdatePopup(true);
       })
       .catch((err) => {
         if (err) {
@@ -126,10 +129,6 @@ function AllCl() {
                 <tr key={item.id}>
                   <td>{item.id_tag}</td>
                   <td>{item.full_identification}</td>
-                  
-                  {/* <td>{item.course_fee}</td>
-        <td>{item.course_duration}</td> */}
-
 <button
                     className="btn btn-primary btn-sm me-2"
                     onClick={(e) => {
@@ -147,8 +146,8 @@ function AllCl() {
                     <EditIcon />
                   </button>
                   <UpdatePopup
-                    trigger={updatePopup}
-                    setTrigger={setUpdatePopup}
+                    trigger={buttonUpdatePopup}
+                    setTrigger={setButtonUpdatePopup}
                     updateProp={classInfo}
                   />
 
@@ -156,6 +155,7 @@ function AllCl() {
                     trigger={buttonPopup}
                     setTrigger={setButtonPopup}
                     classProp={classInfo}
+
                   />
 
                   <button
