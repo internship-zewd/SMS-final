@@ -1,11 +1,9 @@
 const { course } = require("../models");
 
 const getAllCourse = (req, res) => {
-  course
-    .findAll()
+  course.findAll()
     .then((courses) => {
       res.send(courses);
-
       console.log(courses);
     })
     .catch((err) => {
