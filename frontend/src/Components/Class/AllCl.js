@@ -73,10 +73,10 @@ function AllCl() {
   };
   const handleDelete = async (e, id) => {
     await api
-      .delete('deleteInfo/deleteClass/${id}')
+      .delete(`class_room/${id}`)
       .then((res) => {
-        console.log("deleted" + res);
-        console.log(res);
+        console.log( res);
+        alert(res.data)
       });
     window.location.reload();
   };

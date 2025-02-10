@@ -9,13 +9,13 @@ export const UpdatePopup = (props) => {
   const updateProp=props.updateProp
   const id=updateProp.id
   const class_name=updateProp.name
-  const course_name=updateProp.course_id
+  const course_id=updateProp.course_id
   const instructor_id=updateProp.instructor_id
   const id_tag=updateProp.id_tag
   const setTrigger=props.setTrigger
   const [className, setClassName] = useState(class_name);
   const [instructor, setInstructor] = useState(instructor_id);
-  const [courseName, setCourseName] = useState(course_name);
+  const [course, setCourse] = useState(course_id);
   const [instructorList, setInstructorList] = useState([]);
   const [courseList, setCourseList] = useState([]);
   const [errors, setErrors] = useState({});
@@ -24,20 +24,20 @@ export const UpdatePopup = (props) => {
 
 useEffect(()=>{
   setClassName(class_name)
-  setCourseName(course_name)
+  setCourse(course_id)
   setInstructor(instructor_id)
   getInstructors()
   getCourses()
 
-},[class_name,instructor_id,course_name])
+},[class_name,instructor_id,course_id])
 
 
   // useEffect(() => {
 
   //   console.log(updateProp);
   //   setClassName(updateProp.className);
-  //   setInstructor(updateProp.instructor);
-  //   setCourseName(updateProp.courseName);
+  //   setInstructor(updateProp.instructor_id);
+  //   setCourse(updateProp.course_id);
   //   nameOnly=updateProp.className.split(' ')
   //   setFinalName (nameOnly[1])
   //   getCourses();
@@ -71,7 +71,7 @@ useEffect(()=>{
     e.preventDefault();
 
     console.log("im in here ");
-    await api.put(`class_room/update/${id}`, { className, instructor, courseName,id_tag })
+    await api.put(`class_room/update/${id}`, { className, instructor, course,id_tag })
       .then((res) => {
         alert(res.data);
         console.log(res.data);
@@ -124,8 +124,8 @@ useEffect(()=>{
                       <span className="details">Course</span>
                       <select
                         required
-                        defaultValue={courseName}
-                        onChange={(e) => { setCourseName(e.target.value) }}
+                        defaultValue={course}
+                        onChange={(e) => { setCourse(e.target.value) }}
                         name="course"
                       >
                         <option>Select Course</option>

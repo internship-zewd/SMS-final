@@ -88,24 +88,22 @@ const createClass = async (req, res) => {
 
 
 const updateClass = (req, res) => {
-    const { className, instructorName, courseName,id_tag} = req.body;
-    const identification=fullIdentification.split(" ")
-    fullIdentification=identification[0]+" "+courseName
-    
+    const { className, instructor, course,id_tag} = req.body;
+   
     class_room.update(
         {
           class_name: className,
-          courseName: courseName,
-          instructorName:instructorName,
-          full_Identification:fullIdentification
+          course: course,
+          instructor:instructor,
   
         },
   
         { where: { id: req.params.id } }
       )
-      .then((course) => {
-        console.log(course);
-        console.log(req.params.id);
+      .then((classes) => {
+        console.log(classes);
+        console.log(classes);
+        res.send({message:"class updated successfully",classUpdated:classes})
       })
       .catch((err) => {
         if (err) {
@@ -113,6 +111,21 @@ const updateClass = (req, res) => {
         }
       });
   };
+  const deleteClass=async(req,res)=>{
+    try{
+        const classId=req.params.id
+        const deletedClass= class_room.destroy({where:{id:classId}})
+        res.send("successfully deleted")
+        }
+        catch(error){
+            if(error){
+                console.log("error: ",error)
+            }
+
+        }
+
+  }
+
 
 module.exports={
     getAllClass,
@@ -120,4 +133,5 @@ module.exports={
     getByCourse,
     createClass,
     updateClass,
+    deleteClass
 }
