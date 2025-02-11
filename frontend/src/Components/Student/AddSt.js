@@ -259,6 +259,7 @@ function AddSt() {
                 <div className="input-box">
                   <span className="details">Class</span>
                   <select
+                  disabled={!course}
                     required
                     onChange={(e) => {
                       setClasss(e.target.value);
@@ -269,7 +270,7 @@ function AddSt() {
                       Select Class
                     </option>
                     {classFetched.map((clas) => (
-                      <option value={clas.id}>
+                      <option key={clas.id} value={clas.id}>
                         {clas.full_identification}
                       </option>
                     ))}
