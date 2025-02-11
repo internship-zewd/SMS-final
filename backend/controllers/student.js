@@ -75,16 +75,15 @@ const createStudent=async(req,res)=>{
 
 
 const updateStudent=async(req,res)=>{
-    const {firstName,middleName,lastName,email,phonenumber,gender,course,class_room,paymentStatus,dob,fullIdentification}=req.body   
-    const fullName=firstName+" "+middleName+" "+lastName
+    const {fullName,email,phonenumber,gender,paymentStatus,course,classs,dob,idTag}=req.body   
 
 
-    fullIdentification=idTag+" "+fullName
+    const fullIdentification=idTag+" "+fullName
     
     student.update(
         {
             full_name:fullName,
-            class_id:class_room,
+            class_id:classs,
             email : email,
             phonenumber : phonenumber,
             gender : gender,
@@ -99,6 +98,7 @@ const updateStudent=async(req,res)=>{
     .then(( student)=>{
         console.log( student)
         console.log(req.params.id)
+        res.send(student)
     })
     .catch(err=>{
         if(err)

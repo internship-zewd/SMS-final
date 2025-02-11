@@ -1,7 +1,9 @@
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import '../DashContent/DashContent.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import api from "../../resource/api"
+
+
 
 
 
@@ -10,8 +12,8 @@ export const UpdatePopup=(props)=>{
     const setTrigger=props.setTrigger
     const updateProp=props.updateProp
     const id=updateProp.id
-
-    const [username, setUsername] = useState(updateProp.username);
+    const idTag=localStorage.getItem('id_tag')
+    const [fullName, setFullName] = useState(updateProp.full_name);
     const [email, setEmail] = useState(updateProp.email);
     const [gender, setGender] = useState(updateProp.gender);
     const [phonenumber, setPhonenumber] = useState(updateProp.phonenumber);
@@ -20,19 +22,55 @@ export const UpdatePopup=(props)=>{
     const [course, setCourse] = useState(updateProp.course);
     const [classs, setClasss] = useState(updateProp.classs);
     const [dob, setDob] = useState(updateProp.dob);
-    const [registno, setRegistno] = useState(updateProp.registno);
+    // const [registno, setRegistno] = useState(updateProp.registno);
+    const [coursesFetched,setCoursesFetched]=useState([])
+    const [classesFetched,setClassesFetched]=useState([])
+    
+
    
+   const getCourses=async()=>{
+
+    await api.get(`course/getAll`)
+   .then((res)=>{
+    setCoursesFetched(res.data)
+    console.log('These r the courses fetched: ', res.data)
+
+   }).catch((error)=>{
+    if(error){
+        console.log(error)
+    }
+   })
+     
+   }
+   const getClasses=async()=>{
+
+    await api.get(`class_room/getAll`)
+   .then((res)=>{
+    setClassesFetched(res.data)
+    console.log('These r the classes fetched: ', res.data)
+
+   }).catch((error)=>{
+    if(error){
+        console.log(error)
+    }
+   })
+     
+   }
+
+
    
 // console.log(updateProp.id)
 
 
 const handleSubmit = async(e) => {
-  //  e.preventDefault();
+   e.preventDefault();
    
     return await api
-    .post(`student/update/${id}`,{username,email,phonenumber,gender,paymentStatus,addmitiondate,course,classs,dob,registno})
+    .put(`student/update/${id}`,{fullName,email,phonenumber,gender,paymentStatus,course,classs,dob})
     .then((res)=>{
         console.log(res.data)
+        alert("Updated succesfully!")
+        window.location.reload()
     })
     .catch((err)=>{
         if(err){
@@ -40,7 +78,10 @@ const handleSubmit = async(e) => {
         }
     })
 }
-
+ useEffect(()=>{
+    getCourses()
+    getClasses()
+ },[])
     return(props.trigger)?(
         
         
@@ -60,7 +101,7 @@ const handleSubmit = async(e) => {
                         <div className="user-details">
                             <div className="input-box">
                                 <span className="details">Full Name</span>
-                                <input type="text" name="username" placeholder="Enter your name" defaultValue={updateProp.username} required minLength={6} onChange={(e)=>{setUsername(e.target.value )}} />
+                                <input type="text" name="fullName" placeholder="Enter your name" defaultValue={updateProp.full_name} required minLength={6} onChange={(e)=>{setFullName(e.target.value )}} />
                             </div>
 
                             <div className="input-box">
@@ -71,13 +112,13 @@ const handleSubmit = async(e) => {
 
                             <div className="input-box">
                                 <span className="details">Mobile Number</span>
-                                <input type="number" placeholder="09--------" name="phonenumber"  defaultValue={updateProp.phonenumber} required maxlength="10" onChange={(e)=>{setPhonenumber(e.target.value )}} />
+                                <input type="number"  placeholder="09--------" name="phonenumber"  defaultValue={updateProp.phonenumber} required maxlength="10" onChange={(e)=>{setPhonenumber(e.target.value )}} />
 
                             </div>
 
                             <div className="input-box">
                                 <span className="details">Gender</span>
-                                <select required onChange={(e)=>{setGender(e.target.value )}} name="gender" defaultalue={updateProp.gender}>
+                                <select required onChange={(e)=>{setGender(e.target.value )}} name="gender" defaultValue={updateProp.gender}>
                                     <option value="">Select</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
@@ -88,12 +129,13 @@ const handleSubmit = async(e) => {
                             <div className="input-box">
 
                                 <span className="details">Course</span>
-                                <select required onChange={(e)=>{setCourse(e.target.value )}} name="course" defaultValue={updateProp.course} >
+                                <select required onChange={(e)=>{setCourse(e.target.value )}} name="course" defaultValue={updateProp.course_id} >
                                     <option value="">Select Course</option>
-                                    <option value='graphic-design'>Graphic design</option>
-                                        <option value='digital-marketing'>Digital marketing</option>
-                                        <option value='photography'>Photography</option>
-                                        <option value='animation'>Animation and motion design</option>
+                                    {
+                                        coursesFetched.map((item)=>(
+                                            <option key={item.id} value={item.id}>{item.course_name}</option>
+                                        ))
+                                    }
                                 </select>
 
                             </div>
@@ -101,18 +143,22 @@ const handleSubmit = async(e) => {
                             <div className="input-box">
 
                                 <span className="details">Class</span>
-                                <select required onChange={(e)=>{setClasss(e.target.value )}} name="classs" defaultValue={updateProp.classs}>
+                                <select 
+                                required 
+                                onChange={(e)=>{setClasss(e.target.value )}} 
+                                name="classs" 
+                                defaultValue={updateProp.class_id}>
                                     <option value="">Select Class</option>
-                                    <option value="a">A</option>
-                                    <option value="b">B</option>
-                                    <option value="b">C</option>
+                                    {classesFetched.map((item)=>(
+                                        <option key={item.id} value={item.id}>{item.full_identification}</option>
+                                    ))}
                                 </select>
                             </div>
 
-                            <div className="input-box">
+                            {/* <div className="input-box">
                                 <span className="details">Transcript</span>
                                 <input type="file" accept="pdf/*" required  />
-                            </div>
+                            </div> */}
 
                             <div className="input-box">
                                 <div className="gender-details">
@@ -131,16 +177,16 @@ const handleSubmit = async(e) => {
                                 <span className="details">Date of Birth</span>
                                 <input type="date" placeholder="" id="Date" name="dob" defaultValue={updateProp.dob} required onChange={(e)=>{setDob(e.target.value )}} />
                             </div>
-                            <div className="input-box">
+                            {/* <div className="input-box">
                                 <span className="details">Admission Date</span>
-                                <input type="date" placeholder="" id="Date" name="addmitiondate" defaultValue={updateProp.addmitiondate} required onChange={(e)=>{setAddmitiondate(e.target.value )}} />
-                            </div>
+                                <input type="date" placeholder="" id="Date" name="addmitiondate" defaultValue={updateProp.createdAt} required onChange={(e)=>{setAddmitiondate(e.target.value )}} />
+                            </div> */}
 
-                            <div className="input-box">
+                            {/* <div className="input-box">
                                 <span className="details">Registration Number</span>
                                 <input type="text" placeholder="Registration Number" name="registno" defaultValue={updateProp.registno}  required maxlength="10" onChange={(e)=>{setRegistno(e.target.value )}} />
 
-                            </div>
+                            </div> */}
 
 
                             <button className="btn btn-info btn-block"

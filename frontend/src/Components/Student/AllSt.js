@@ -17,7 +17,7 @@ function AllSt() {
     const [data, setData] = useState([]);
     
     const [studentinfo, setStudentinfo] = useState({});
-    const [updatePopup, setUpdatePopup] = useState(false);
+    const [updateButtonPopup, setUpdateButtonPopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [Class,setClass]=useState([])
     const [empty,setEmpty]=useState(false)
@@ -86,12 +86,12 @@ function AllSt() {
   const handleUpdate=async(e,id)=>{
   
       // e.preventDefault(); 
-      await api.get(`student/update/${id}`)
+      await api.get(`student/getOne/${id}`)
       .then((response)=>{
           setStudentinfo(response.data)
           console.log(response.data)
           console.log(studentinfo)
-          setUpdatePopup(true)
+          setUpdateButtonPopup(true)
       })
       .catch((err)=>{
           if(err){
@@ -169,7 +169,7 @@ function AllSt() {
                                     {/* <td>{item.course}</td> */}
                                     <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleView(e, item.id)}}><VisibilityIcon/></button>
                                     <button className="btn btn-primary btn-sm me-2" onClick={(e) => { handleUpdate(e, item.id)}}><EditIcon/></button>
-                                    <UpdatePopup trigger={updatePopup} setTrigger={setUpdatePopup} updateProp={studentinfo}/>
+                                    <UpdatePopup trigger={updateButtonPopup} setTrigger={setUpdateButtonPopup} updateProp={studentinfo}/>
                                     
                                    <ViewPopup trigger={buttonPopup} setTrigger={setButtonPopup} studentProp={studentinfo} />
                                     
