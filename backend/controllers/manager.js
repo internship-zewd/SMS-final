@@ -59,10 +59,10 @@ const getOneManager=(req,res)=>{
 
 const createManager=async (req,res)=>{
     const userEmail=req.body.email
-    const {firstName,middleName,lastName,email,phone,salary}=req.body
+    const {fullName,email,phone,salary}=req.body
     const previousId=await manager.max('id');
     const idTag=previousId!==null?`MAN${1000+previousId}`:`MAN${1000}`
-    const fullName=firstName+" "+middleName+" "+lastName
+    // const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
     const emailSplited=email.split("@")
     
@@ -95,9 +95,9 @@ const password=await generatePassword()
 }
 
 const updateManager=async (req,res)=>{
-    const {firstName,middleName,lastName,email,phone,salary,fullIdentification}=req.body;
+    const {fullName,email,phone,salary,fullIdentification}=req.body;
     const identification=fullIdentification.split(" ")
-    const fullName=firstName+" "+middleName+" "+lastName
+    // const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
   
   
@@ -115,6 +115,7 @@ const updateManager=async (req,res)=>{
 
        { where:{id:req.params.id}})
     .then((managers)=>{
+        res.send("Succesfully Updated")
         console.log(managers)
         console.log(req.params.id)
     })

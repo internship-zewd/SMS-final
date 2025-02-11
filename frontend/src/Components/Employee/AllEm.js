@@ -11,6 +11,7 @@ import api from "../../resource/api"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 // import {getAllEmployees} from './getAllEmployees'
 
 function AllEm() {
@@ -41,9 +42,9 @@ function AllEm() {
         const manager=await api.get('manager/getAll')
         const accountant=await api.get('accountant/getAll')
 
-        await api.all([instructor,admin,manager,accountant])
+        await axios.all([instructor,admin,manager,accountant])
         .then( 
-           api.spread((...allData)=>{
+           axios.spread((...allData)=>{
             const instructor=allData[0].data
             const admin=allData[1].data
             const manager=allData[2].data
@@ -137,7 +138,10 @@ function AllEm() {
 
 
      await api.delete(`${employee}/delete/${id}`)
-    .then((res)=>{console.log("deleted"+ res)})
+    .then((res)=>{
+      console.log("deleted"+ res)
+    window.location.reload()
+    })
     .catch((err)=>{if(err){console.log(err)}})
     // window.location.reload()
     

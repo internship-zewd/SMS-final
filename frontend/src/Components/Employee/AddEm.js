@@ -8,9 +8,10 @@ import "./AddEm.css";
 function  AddEm () {
 
     const [employeeType, setEmployeeType] = useState("")
-    const [firstName, setFirstName] = useState('');
-    const [middleName, setMiddleName] = useState('');
-    const [lastName, setLastName] = useState('');
+    // const [firstName, setFirstName] = useState('');
+    // const [middleName, setMiddleName] = useState('');
+    // const [lastName, setLastName] = useState('');
+    const [fullName,setFullName]=useState("")
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [salary, setSalary] = useState('');
@@ -30,27 +31,27 @@ function  AddEm () {
         if(!employeeType.trim()){
             validationErrors.employeeType="Pick the employee type";
         }
-        if(!regName.test(firstName)){
-            validationErrors.firstName="Employee's first name should consist of only letters";
-        }else if(firstName.length<3){
-            validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters";
-        }else if(firstName.length>15){
-            validationErrors.firstName="Emplloyee's first name should be less than 16 characters";
-            validationErrors.firstName="Employee's first name should be less than 16 characters"
-        }
-        if(!regName.test(middleName)){
-            validationErrors.middleName="Employee's middle name should consist of only letter";
-        }else if(middleName.length<3){
-            validationErrors.middleName="Employee's middle name is supposed to be atleast 3 characters"
-        }else if(middleName.length>15){
-            validationErrors.middleName="Employee's middle name should be less than 16 characters"
-        }
-        if(!regName.test(lastName)){
-            validationErrors.lastName="Employee's last name should consist of only letter"
-        }else if(lastName.length<3){
-            validationErrors.lastName="Employee's last name is supposed to be atleast 3 characters"
-        }else if(lastName.length>15){
-            validationErrors.lastName="Employee's last name should be less than 16 characters"
+        // if(!regName.test(firstName)){
+        //     validationErrors.firstName="Employee's first name should consist of only letters";
+        // }else if(firstName.length<3){
+        //     validationErrors.firstName="Employee's first name is supposed to be atleast 3 characters";
+        // }else if(firstName.length>15){
+        //     validationErrors.firstName="Emplloyee's first name should be less than 16 characters";
+        //     validationErrors.firstName="Employee's first name should be less than 16 characters"
+        // }
+        // if(!regName.test(middleName)){
+        //     validationErrors.middleName="Employee's middle name should consist of only letter";
+        // }else if(middleName.length<3){
+        //     validationErrors.middleName="Employee's middle name is supposed to be atleast 3 characters"
+        // }else if(middleName.length>15){
+        //     validationErrors.middleName="Employee's middle name should be less than 16 characters"
+        // }
+        if(!regName.test(fullName)){
+            validationErrors.fullName="Employee's full name should consist of only letter"
+        }else if(fullName.length<6){
+            validationErrors.fullName="Employee's full name is supposed to be atleast 6 characters"
+        }else if(fullName.length>45){
+            validationErrors.fullName="Employee's full name should be less than 45 characters"
         }
         if(!email.trim()){
             validationErrors.email="Fill in employee's email"
@@ -83,7 +84,7 @@ function  AddEm () {
         if(Object.keys(validationErrors).length===0){
 
         return await api
-        .post(`${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary})
+        .post(`${employeeType}/create`,{fullName,email,password,phone,salary})
         .then((res)=>{alert(res.data)})
         .catch((err)=>{
             if(err){
@@ -129,13 +130,13 @@ function  AddEm () {
                             </div>
 
                             <div className="input-box">
-                                <span className="details">First Name:</span>
-                                <input type='text' id='firstName' required value={firstName} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='off' /><br />
-                                <div className="errors">{errors.firstName}<br/></div>
+                                <span className="details">Full Name:</span>
+                                <input type='text' id='fullName' required value={fullName} onChange={(e) => { setFullName(e.target.value) }} name='fullName' placeholder='Full Name of employee' autoComplete='off' /><br />
+                                <div className="errors">{errors.fullName}<br/></div>
                             </div>
 
 
-                            <div className="input-box">
+                            {/* <div className="input-box">
                                 <span className="details">Middle Name:</span>
                                 <input type='text' id='middleName' required value={middleName} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='off' /><br />
                                 <div className="errors">{errors.middleName}</div>
@@ -145,7 +146,7 @@ function  AddEm () {
                                 <span className="details">Last Name:</span>
                                 <input type='text' id='lastName' required value={lastName} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='off' /><br />
                                 <div className="errors">{errors.lastName}</div>
-                            </div>
+                            </div> */}
 
                             <div className="input-box">
                                 <span className="details">Email:</span>

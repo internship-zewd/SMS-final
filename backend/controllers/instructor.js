@@ -62,10 +62,10 @@ const getOneInstructor=(req,res)=>{
 
 const createInstructor=async (req,res)=>{
     const userEmail=req.body.email
-    const {firstName,middleName,lastName,email,phone,salary}=req.body
+    const {fullName,email,phone,salary}=req.body
     const previousId=await instructor.max('id');
     const idTag=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
-    const fullName=firstName+" "+middleName+" "+lastName
+    // const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
     const emailSplited=email.split("@")
 
@@ -112,9 +112,9 @@ instructor.findAll({where:{email:email}})
 }
 
 const updateInstructor=async (req,res)=>{
-    const {firstName,middleName,lastName,email,phone,salary,fullIdentification}=req.body;
+    const {fullName,email,phone,salary,fullIdentification}=req.body;
     const identification=fullIdentification.split(" ")
-    const fullName=firstName+" "+middleName+" "+lastName
+    // const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
 
  

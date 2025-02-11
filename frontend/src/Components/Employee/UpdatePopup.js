@@ -14,11 +14,12 @@ export const UpdatePopup=(props)=>{
     const updateProp=props.updateProp
     const id=updateProp.id
     const employee_type= updateProp.employee_type
-    const first_name=updateProp.first_name
-    const middle_name=updateProp.middle_name
-    const last_name=updateProp.last_name
+    // const first_name=updateProp.first_name
+    // const middle_name=updateProp.middle_name
+    // const last_name=updateProp.last_name
+    const full_name=updateProp.full_name
     const _email =updateProp.email
-    const _password=updateProp.password
+    const _password="*******"
     const _phone=updateProp.phone
     const _salary=updateProp.salary
     const full_identification=updateProp.full_identification
@@ -27,9 +28,10 @@ export const UpdatePopup=(props)=>{
 
 
     const [employeeType,setEmployeeType]=useState("")
-    const [firstName,setFirstName]=useState("");
-    const [middleName,setMiddleName]=useState("");
-    const [lastName,setLastName]=useState("");
+    // const [firstName,setFirstName]=useState("");
+    // const [middleName,setMiddleName]=useState("");
+    // const [lastName,setLastName]=useState("");
+    const [fullName,setFullName]=useState('')
     const [email,setEmail]=useState("");
     const [phone,setPhone]=useState("");
     const [password,setPassword]=useState("")
@@ -41,9 +43,10 @@ export const UpdatePopup=(props)=>{
 
     useEffect(()=>{
         setEmployeeType(employee_type)
-        setFirstName(first_name)
-        setMiddleName(middle_name)
-        setLastName(last_name)
+        // setFirstName(first_name)
+        // setMiddleName(middle_name)
+        // setLastName(last_name)
+        setFullName(full_name)
         setEmail(_email)
         setPassword(_password)
         setPhone(_phone)
@@ -51,7 +54,7 @@ export const UpdatePopup=(props)=>{
         setFullIdentification(full_identification)
         setUsername(_username)
 
-    },[employee_type,first_name,middle_name,last_name,_email,_phone,_salary,full_identification,_password,_username])
+    },[employee_type,full_name,_email,_phone,_salary,full_identification,_password,_username])
    
 // console.log(updateProp.id)
 
@@ -60,16 +63,15 @@ const handleSubmit=async(e)=>{
      e.preventDefault()
      console.log(employee_type)
 console.log(employeeType)
-console.log(`this is the val ${first_name}  ${firstName}`)
 console.log(`${employeeType}===${updateProp.employee_type}`)
 console.log(email+_email)
     console.log(employee_type+employeeType)
     if (employeeType===employee_type){
 
         console.log("im in here ")
-        await api.put(`${employee_type}/update/${id}`,{firstName,middleName,lastName,email,password,phone,salary,fullIdentification} )
+        await api.put(`${employee_type}/update/${id}`,{fullName,email,password,phone,salary,fullIdentification} )
         .then((res)=>{
-            alert(res.data)
+            alert("sucessfully updated")
             setTrigger(false)
             console.log("we're in put router ")
             window.location.reload()
@@ -83,7 +85,7 @@ console.log(email+_email)
         }
         else{
             console.log(employeeType)
-         await api.post(`${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,username} )
+         await api.post(`${employeeType}/create`,{fullName,email,password,phone,salary,username} )
     .then((res)=>{
 
         alert(res.data)
@@ -140,12 +142,12 @@ console.log(email+_email)
 
 
                                   <div className="input-box">
-                                      <span className="details">First Name:</span>
-                                      <input type='text' id='firstName' required defaultValue={firstName} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='on' /><br />
+                                      <span className="details">Full Name:</span>
+                                      <input type='text' id='fullName' required defaultValue={fullName} onChange={(e) => { setFullName(e.target.value) }} name='fullName' placeholder='Full Name of employee' autoComplete='on' /><br />
                                   </div>
 
 
-                                  <div className="input-box">
+                                  {/* <div className="input-box">
                                       <span className="details">Middle Name:</span>
                                       <input type='text' id='middleName' required defaultValue={middleName} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='on' /><br />
                                   </div>
@@ -153,7 +155,7 @@ console.log(email+_email)
                                    <div className="input-box">
                                        <span className="details">Last Name:</span>
                                        <input type='text' id='lastName' required defaultValue={lastName} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='on' /><br />
-                                  </div>
+                                  </div> */}
 
                                      <div className="input-box">
                                           <span className="details">Email:</span>

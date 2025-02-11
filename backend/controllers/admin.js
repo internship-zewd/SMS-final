@@ -47,8 +47,8 @@ console.log(value)
 
 }
 const createAdmin=async (req,res)=>{
-    const {firstName,middleName,lastName,email,phone,salary}=req.body
-    const fullName=firstName+" "+middleName+" "+lastName
+    const {fullName,email,phone,salary}=req.body
+    // const fullName=firstName+" "+middleName+" "+lastName
   
     const previousId= await admin.max('id')
 const idTagValue= previousId!==null? `ADM${1000+previousId}`:`ADM${1000}`
@@ -85,9 +85,9 @@ const username=emailSplited[0]
 
 const updateAdmin=async(req,res)=>{
     console.log("im in admin put")
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
+    const {fullName,email,password,phone,salary,fullIdentification,username}=req.body;
     const identification=fullIdentification.split(" ")
-    const fullName=firstName+" "+middleName+" "+lastName
+    // const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
 
 
