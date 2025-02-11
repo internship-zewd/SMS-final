@@ -137,7 +137,7 @@ function AddCl() {
                 >
                   <option value="">Select Course</option>
                   {courseList.map((item) => (
-                    <option key={item.full_identification} value={item.full_identification}>
+                    <option key={item.id} value={item.id}>
                       {item.full_identification}
                     </option>
                   ))}
@@ -158,12 +158,12 @@ function AddCl() {
                   disabled={!selectedCourse}
                 >
                   <option value="">Select Instructor</option>
-                  {instructorList.map((instructorName, index) => (
+                  {instructorList.map((instructor, index) => (
                     <option
                       key={index}
-                      value={instructorName.full_identification}
+                      value={instructor.id}
                     >
-                      {instructorName.full_identification}
+                      {instructor.full_identification}
                     </option>
                   ))}
                 </select>

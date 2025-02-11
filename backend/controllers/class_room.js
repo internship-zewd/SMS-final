@@ -47,9 +47,8 @@ const getByCourse=(req,res)=>{
 
 const createClass = async (req, res) => {
     const body = req.body;
-    const className = body.className;
-    const instructorName = body.selectedInstructor;
-    const courseName = body.selectedCourse;
+    const{className,selectedInstructor,selectedCourse}=body;
+    
 
     try {
         const previousClassId = await class_room.max('id');
@@ -57,24 +56,24 @@ const createClass = async (req, res) => {
         
         const idTagValue = previousClassId !== null ? `CLS${1000 + previousClassId}` : 'CLS1000';
         const fullClass = `${idTagValue} ${className}`;
-        const instId = await instructor.findOne({
-            where: {
-                full_identification: instructorName
-            },
-            attributes: ['id']
-        })
+        // const instId = await instructor.findOne({
+        //     where: {
+        //         full_identification: instructorName
+        //     },
+        //     attributes: ['id']
+        // })
 
-        const findCourse = await course.findOne({
-            where: {
-                full_identification: courseName
-            },
-            attributes: ['id']
-        })
+        // const findCourse = await course.findOne({
+        //     where: {
+        //         full_identification: courseName
+        //     },
+        //     attributes: ['id']
+        // })
         await class_room.create(
             {
                 name: className,
-                instructor_id: instId.id,
-                course_id: findCourse.id,
+                instructor_id: selectedInstructor,
+                course_id: selectedCourse,
                 id_tag: idTagValue,
                 full_identification: fullClass
             }
