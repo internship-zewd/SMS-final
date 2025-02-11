@@ -17,9 +17,9 @@ function Archive() {
   const [username,setUserName]=useState('')
   const username_local=localStorage.getItem('username')
 
-  useEffect( 
+  useEffect( ()=>{
     setUserName(username_local)
-    ,[])
+  },[])
 
 
   const handleView=async(id)=>{

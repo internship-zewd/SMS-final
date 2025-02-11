@@ -10,18 +10,18 @@ import {ViewPopup} from './ViewPopup';
 import {UpdatePopup} from './UpdatePopup';
 
 function Manage() {
+    const username_local=localStorage.getItem('username')
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
     const [reminderinfo, setReminderinfo] = useState({});
     const [updatePopup, setUpdatePopup] = useState(false);
     const [buttonPopup, setButtonPopup] = useState(false);
-    const [username,setUserName]=useState("")
-    const username_local=localStorage.getItem('username')
+    const [username,setUserName]=useState(username_local)
+    
 
     useEffect(() => {
         getAllRemainders();
         setUserName(username_local)
-
     }, [])
 
     const getAllRemainders=async()=>{
@@ -30,6 +30,7 @@ function Manage() {
       .then((res)=>{
           console.log(res.data)
           setData(res.data)
+          return;
           
       })
       .catch((err)=>{

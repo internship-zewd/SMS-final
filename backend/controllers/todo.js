@@ -54,7 +54,7 @@ const due=moment(date).subtract(days,'days').toDate();
         status:false,
         notify:notify,
         due:due,
-        user:user
+        username:username
     })
     .then((response)=>{
         res.send(response)
@@ -69,9 +69,9 @@ const due=moment(date).subtract(days,'days').toDate();
 
 const getAllReminders=async(req,res)=>{
     console.log('im here')
+   const {username}=req.params
 
-
-    await todo.findAll()
+    await todo.findAll({where:{username:username}})
     .then((todos)=>{
         console.log(todos)
         res.send(todos)
@@ -102,18 +102,26 @@ const getOneReminder=async(req,res)=>{
 
 
 const updateReminder=(req,res)=>{
-    const {id}=req.params
-    const {description,name,time,date,status,notify}=req.body
-    todo.update({
-        description:description,
-        name:name,
-        time:time,
-        date:date,
-        notify:notify,
-        status:status,
-    },{where:{id:id}})
-    .then(res.send("updated successfully"))
-    .catch((err)=>{if(err){console.log(err)}})
+    try{
+        const {id}=req.params
+        const {description,name,time,date,status,notify}=req.body
+        todo.update({
+            description:description,
+            name:name,
+            time:time,
+            date:date,
+            notify:notify,
+            status:status,
+        },{where:{id:id}})
+        .then(res.send("updated successfully"))
+        .catch((err)=>{if(err){console.log(err)}})
+
+    }catch(error){
+        if(error){
+            console.log('error in updating reminder')
+        }
+    }
+    
 }
 
 const updateReminderPopup=(req,res)=>{
