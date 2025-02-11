@@ -53,17 +53,17 @@ const createCourse = async (req, res) => {
   res.send("insert");
 };
 
-const updateCourse = (req, res) => {
-  const { courseName, fee, duration,fullIdentification} = req.body;
+const updateCourse =async (req, res) => {
+  const { courseName,fee,duration,fullIdentification} = req.body;
   const identification=fullIdentification.split(" ")
-  fullIdentification=identification[0]+" "+courseName
+  const fullIdentificationNew=identification[0]+" "+courseName
   
-  course.update(
+  await course.update(
       {
         course_name: courseName,
-        course_fee: fee,
+        fee: fee,
         course_duration: duration,
-        full_Identification:fullIdentification
+        full_identification:fullIdentificationNew
 
       },
 
@@ -72,6 +72,7 @@ const updateCourse = (req, res) => {
     .then((course) => {
       console.log(course);
       console.log(req.params.id);
+      res.send('course successfully updated')
     })
     .catch((err) => {
       if (err) {

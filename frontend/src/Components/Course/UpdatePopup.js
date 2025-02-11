@@ -13,13 +13,15 @@ export const UpdatePopup=(props)=>{
     const updateProp=props.updateProp
     const id=updateProp.id
     const course_name=updateProp.course_name
-    const course_fee=updateProp.course_fee
+    const course_fee=updateProp.fee
     const course_duration=updateProp.course_duration
+    const fullIdentification=updateProp.full_identification
 
     const [courseName, setCoursename]=useState(updateProp.course_name)
     const [fee, setFee]=useState(updateProp.course_fee);
     const [duration, setDuration] =useState(updateProp.course_duration);
     const [errors,setErrors]=useState({})
+    console.log(updateProp)
     
    
 //  console.log(updateProp.id)
@@ -36,19 +38,16 @@ useEffect(()=>{
 
 const handleSubmit=async(e)=>{
      e.preventDefault()
-     console.log(course_name)
-    console.log(courseName)
-// console.log(`this is the val ${first_name}  ${firstName}`)
-console.log(`${courseName}===${updateProp.course_name}`)
-// console.log(email+_email)
-//     console.log(course_name+employeeType)
-    if (courseName===course_name){
+  
+    if (courseName){
 
         console.log("im in here ")
-        await api.put(`course/update/${id}`,{courseName,fee,duration} )
+        await api.put(`course/update/${id}`,{courseName,fee,duration,fullIdentification} )
         .then((res)=>{
             console.log(res.data)
             console.log("we're in put router ")
+            alert('Course successfully updated!')
+            window.location.reload()
         })
         .catch((err)=>{
             if(err){
@@ -116,7 +115,7 @@ console.log(`${courseName}===${updateProp.course_name}`)
 
                                 <div className="input-box">
                                     <span className="details">Expected Duration in Days</span>
-                                    <input type='number' id='duration' required defaultValue={updateProp.duration} onChange={(e) => { setDuration(e.target.value) }} name='duration' placeholder='Enter duration' /><br />
+                                    <input type='number' id='duration' required defaultValue={updateProp.course_duration} onChange={(e) => { setDuration(e.target.value) }} name='duration' placeholder='Enter duration' /><br />
                                    
                                 </div>
 

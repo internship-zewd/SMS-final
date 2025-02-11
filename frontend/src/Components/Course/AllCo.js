@@ -62,10 +62,11 @@ function AllCo() {
     const handleUpdate=async(e,id)=>{
     
         // e.preventDefault(); 
-        await api.get(`course/update/${id}`)
+        await api.get(`course/getOne/${id}`)
         .then((response)=>{
             setCourseInfo(response.data)
             // console.log(response.data)
+          
             console.log(courseInfo.course_name)
             setUpdatePopup(true)
         })
