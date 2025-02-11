@@ -3,20 +3,21 @@ const bodyParser = require("body-parser");
 const db = require("./models");
 const express = require("express");
 const cors = require("cors");
+const dotenv=require('dotenv')
 const app = express();
-PORT = 8081;
+const PORT = process.env.PORT||8081;
+dotenv.config()
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.ORIGIN,
 };
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-require("dotenv").config();
+
 
 const studentRoute = require("./routes/student");
 app.use("/student", studentRoute);
-PORT = 8081;
 const instructorRoute = require("./routes/instructor");
 app.use(`/instructor`, instructorRoute);
 

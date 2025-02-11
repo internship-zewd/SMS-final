@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "zewd_management_system",
-    "host": "127.0.0.1",
+    "username": "399168",
+    "password":"Hellohowru$$54",
+    "database": "lightningspeed_zewd",
+    "host": "mysql-lightningspeed.alwaysdata.net",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "zewd_management_system",
-    "host": "127.0.0.1",
+    "username": "399168",
+    "password": "Hellohowru$$54",
+    "database": "lightningspeed_zewd",
+    "host": "mysql-lightningspeed.alwaysdata.net",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "zewd_management_system",
-    "host": "127.0.0.1",
+    "username": "399168",
+    "password": "Hellohowru$$54",
+    "database": "lightningspeed_zewd",
+    "host": "mysql-lightningspeed.alwaysdata.net",
     "dialect": "mysql"
   }
 }
