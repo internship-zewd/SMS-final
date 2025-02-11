@@ -64,7 +64,7 @@ function AllSt() {
   }
   const handleView=async(e,id)=>{
       // e.preventDefault();
-      return await api.get(`getOne/${id}`)
+      return await api.get(`student/getOne/${id}`)
       .then((response)=>{
   
           const viewData=response.data
