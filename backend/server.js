@@ -56,11 +56,11 @@ app.use("/markList", markListRouter);
 var profileRouter = require("./routes/profile");
 app.use("/profile", profileRouter);
 
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
 
 db.sequelize.sync({ alter: true }).then((req) => {
   app.listen(PORT, () => {

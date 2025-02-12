@@ -19,14 +19,16 @@
 .top {
     display: flex;
     top: 0;
-    justify-content: space-between;
-    align-items: center;
+    justify-content:flex-start;
+    align-items:center;
     width: 100%;
     height: 10%;
     padding: 10px;
     background-color: var(--dark-color);
     z-index: 10;
+    text-align: center;
 }
+
 
 .top .sidebarToggle {
     font-size: 26px;
@@ -91,21 +93,25 @@
 }
 
 
-.top .dropdown {
+.top .dropdown .left-nav{
     /* float: right; */
    
     overflow: visible;
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: white;
+
    /* top: 10px; */
     /* left: 735px; */ 
    
+}
+.dropdown{
+    top:10px;
 }
 
 
@@ -263,6 +269,7 @@ button{
     display: flex;
     align-items: center;
     justify-content: center;
+    bottom:10px;
     width: 40px;
     height: 40px; 
     background-color: #5D7B86; 
@@ -272,6 +279,20 @@ button{
     outline: none;
     color: white;
     text-align:center;
+    margin:11px;
+
+    
+}
+.left-nav div{
+    display:inline-flex;
+    margin:4px;
+    align-items:flex-start;
+    left:1050px;
+    justify-content:flex-start;
+    text-align:center;
+    position:relative;
+    overflow:visible;
+
 
     
 }

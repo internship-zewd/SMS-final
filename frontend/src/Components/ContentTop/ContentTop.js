@@ -77,12 +77,8 @@ useEffect(()=>{
 
   return (
     <div className="top">
-      <i className="uil uil-bars sidebarToggle" onClick={click}></i>
-
-      {/* <div className="searchBox">
-        <i className="uil uil-search"></i>
-        <input type="text" placeholder="Search here..." />
-      </div> */}
+      <i className="uil uil-bars sidebarToggle" onClick={click}/>
+   <div className="left-nav">
 
       <div className="dropdown">
         <button className="dropbtn" onClick={handleButtonClick}>
@@ -90,6 +86,7 @@ useEffect(()=>{
 
           <img className="userProfile" src={Profile} alt="User profile" />
         </button>
+        <div>
 
         {isOpen && (
           <div className="droplist">
@@ -124,8 +121,11 @@ useEffect(()=>{
             </ul>
           </div>
         )}
-      </div>
-
+        </div>
+        </div>
+  
+      
+<div>
       {isVisible &&
        <button className="todobtn">
         <Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} >
@@ -133,11 +133,16 @@ useEffect(()=>{
           <i class="uil uil-bell notify animated-bell"></i>
           <span class="notification-dot"></span></div></Link>
           </button> } 
-                
+                </div>
+            <div>
                 {isInvisible && <button className="todobtn">
-                  <Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><i className="uil uil-bell notify"></i></Link></button>}
-               
-                <button className="todobtn"><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Archive"}} ><i className="uil uil-schedule toDo"></i></Link></button>
+                  <Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} >
+                  <i className="uil uil-bell notify"></i></Link></button>}
+                  <div/>
+                <button className="todobtn"><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Archive"}} >
+                <i className="uil uil-schedule toDo"></i></Link></button>
+                </div>
+    </div>
     </div>
   );
 }
