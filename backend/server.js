@@ -56,17 +56,7 @@ app.use("/markList", markListRouter);
 var profileRouter = require("./routes/profile");
 app.use("/profile", profileRouter);
 
-<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, "../frontend/build")));
-=======
-
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-});
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
->>>>>>> 1d1eaad1cc3bbfb75b182bedb951f89e4f27117b
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
