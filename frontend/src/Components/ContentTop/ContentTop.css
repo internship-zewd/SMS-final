@@ -283,7 +283,7 @@ button{
 
     
 }
-.left-nav div{
+.left-nav > div:first-child{
     display:inline-flex;
     margin:4px;
     align-items:flex-start;
@@ -291,7 +291,7 @@ button{
     justify-content:flex-start;
     text-align:center;
     position:relative;
-    overflow:visible;
+    overflow:visible
 
 
     
