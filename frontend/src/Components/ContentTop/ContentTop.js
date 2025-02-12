@@ -86,7 +86,7 @@ useEffect(()=>{
 
           <img className="userProfile" src={Profile} alt="User profile" />
         </button>
-        <div>
+        <div className="dropdown-box">
 
         {isOpen && (
           <div className="droplist">
@@ -106,7 +106,6 @@ useEffect(()=>{
                   </NavLink>
                 </li>
                 <li>
-            
                   <NavLink to="/" >
                   <a href="">
                     <i className="uil uil-signout"></i>
