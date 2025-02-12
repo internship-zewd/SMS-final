@@ -8,9 +8,9 @@ const app = express();
 const PORT = process.env.PORT||8081;
 dotenv.config()
 
-// const corsOptions = {
-//   origin: process.env.ORIGIN,
-// };
+const corsOptions = {
+  origin: "*",
+};
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
