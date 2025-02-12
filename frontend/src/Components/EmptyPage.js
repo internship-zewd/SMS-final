@@ -1,16 +1,15 @@
-import React from 'react';
-import './EmptyPage.css';
-import { Icon } from '@material-ui/core';
-import { SentimentVeryDissatisfied } from '@material-ui/icons';
+import React from "react";
+import "./EmptyPage.css";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied"; 
 
 export default function EmptyPage(props) {
-  const pageName = props.pageName;
+  const { pageName, children } = props;
 
   return (
     <div className="empty-page">
-      <Icon component={SentimentVeryDissatisfied} className="sad-icon" />
+      <SentimentVeryDissatisfiedIcon className="sad-icon" /> 
       <div className="empty-message">No {pageName}s Registered</div>
-      {props.children}
+      {children}
     </div>
   );
 }
