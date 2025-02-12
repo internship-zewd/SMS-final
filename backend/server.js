@@ -8,9 +8,9 @@ const app = express();
 const PORT = process.env.PORT||8081;
 dotenv.config()
 
-const corsOptions = {
-  origin: process.env.ORIGIN,
-};
+// const corsOptions = {
+//   origin: process.env.ORIGIN,
+// };
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -55,6 +55,11 @@ app.use("/markList", markListRouter);
 var profileRouter = require("./routes/profile");
 app.use("/profile", profileRouter);
 
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
 
 db.sequelize.sync({ alter: true }).then((req) => {
   app.listen(PORT, () => {
