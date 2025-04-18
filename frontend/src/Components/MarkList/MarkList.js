@@ -74,12 +74,14 @@ function MarkList() {
                       }}
                     >
                       {classList.map((className, index) => {
-                        <option
+                        return(
+                           <option
                           key={index}
                           value={className.full_identification}
                         >
                           {className.full_identification}
-                        </option>;
+                        </option>);
+                      
                       })}
                     </select>
                   </div>

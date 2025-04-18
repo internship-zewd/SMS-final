@@ -1,3 +1,4 @@
+import React from "react";
 function ManDashContent() {
   return (
     <div className="boxes">

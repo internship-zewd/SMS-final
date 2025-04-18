@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import api from "../../resource/api"
+import React,{ useState, useEffect } from "react";
+import api from "../../resource/api";
+
 
 
 function AdminDashContent() {

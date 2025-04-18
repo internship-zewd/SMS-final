@@ -1,3 +1,4 @@
+import React from "react";
 function InsDashContent() {
   return (
     <div className="boxes">
