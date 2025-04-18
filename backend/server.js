@@ -6,11 +6,12 @@ const cors = require("cors");
 const dotenv=require('dotenv')
 const app = express();
 const PORT = process.env.PORT||8081;
+const ORIGIN=process.env.ORIGIN||"http://localhost:8000"
 const path=require('path')
 dotenv.config()
 
 const corsOptions = {
-  origin: "*",
+  origin: ORIGIN,
 };
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
