@@ -102,14 +102,14 @@ const sendEmail = async (email, token) => {
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'exopain2930@gmail.com',
+      user: 'jalaladdisu@gmail.com',
       pass: process.env.appPassword,
     },
   });
 
   // Send email with the token
   let info = await transporter.sendMail({
-    from: 'exopain2930@gmail.com',
+    from: 'jalaladdisu@gmail.com',
     to: email,
     subject: 'Password Reset',
     text: `Click on the following link to reset your password: http://localhost:3000/resetPassword?token=${token}`,
