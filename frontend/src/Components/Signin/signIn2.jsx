@@ -84,7 +84,7 @@ function SignIn2 () {
                                         <label ><input name='remember' checked={remember} type="checkbox" id='remember' onChange={(e) => setRemember(e.target.value)} />Remember me</label>
                                         <label className="forget"><button onClick={handleForgotPassword}> Forgot password </button></label>
                                     </div>
-                                    <div className="inputBx">
+                                    <div className="inputBx button">
                                         <input type="submit" value="sign in" name="" />
                                     </div>
                                 </form>
