@@ -25,23 +25,24 @@ section{
 }
 section .imgBx{
     position: relative;
-    width: 50%;
-    height: 100%;
+    width: 45%;
+    height: 70%;
+    padding:30px;
 }
 section .imgBx img{
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
-    height:80%;
-    width: 50%;
-    padding:30px;
+    height:100%;
+    width: auto;
+    
     /* height: 60%; */
 }
 section .contentBx{
     display: flex;
     justify-content: center;
-    width: 50%;
+    width: 100%;
     border-bottom-right-radius: 50px;
     border-top-right-radius: 50px;
     background: var(--dark-color);
@@ -69,6 +70,8 @@ section .contentBx .formBx h2{
 }
 section .contentBx .formBx .inputBx{
     margin-bottom: 30px;
+    
+
 }
 section .contentBx .formBx .inputBx span{
     font-size: 16px;
@@ -77,6 +80,7 @@ section .contentBx .formBx .inputBx span{
     color: var(--text-color);
     font-weight: 300;
     letter-spacing: 1px;
+    
 }
 section .contentBx .formBx .inputBx input{
     width: 100%;
@@ -85,6 +89,7 @@ section .contentBx .formBx .inputBx input{
     font-weight: 400;
     border: 1px solid #4b4a4a;
     background: transparent;
+    border-radius: 15px;
 }
 section .contentBx .formBx .inputBx select{
     width: 100%;
@@ -93,6 +98,7 @@ section .contentBx .formBx .inputBx select{
     font-weight: 400;
     border: 1px solid #4b4a4a;
     background: transparent;
+    border-radius: 15px;
 }
 section .contentBx .formBx .inputBx input[type="submit"]{
     background: goldenrod;
@@ -102,6 +108,7 @@ section .contentBx .formBx .inputBx input[type="submit"]{
     font-weight: 500;
     cursor: pointer;
     margin-top: 10px;
+    
 }
 section .contentBx .formBx .inputBx input[type="submit"]:hover{
     background: rgb(255, 183, 0);
@@ -203,9 +210,6 @@ section .contentBx .formBx .forget button:hover{
     section .contentBx .formBx .remember{
         margin: 11px;
     }
-    section .imgBx img{
-        width: 45%;
-        
-    }
+   
 }
 
