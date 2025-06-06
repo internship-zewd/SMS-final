@@ -56,7 +56,7 @@ function SignIn2 () {
         <div className="fullcontent">
                     <section>
                         <div className="imgBx">
-                            <img src={zewdlogo} alt='' />
+                            <img src={zewdlogo} alt='logo' />
                         </div>
                         <div className="contentBx">
                             <div className="formBx">
