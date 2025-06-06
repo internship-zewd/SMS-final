@@ -53,6 +53,7 @@ function SignIn2 () {
         
     };
     return(
+        <div className="background">
         <div className="fullcontent">
                     <section>
                         <div className="imgBx">
@@ -85,12 +86,13 @@ function SignIn2 () {
                                         <label className="forget"><button onClick={handleForgotPassword}> Forgot password </button></label>
                                     </div>
                                     <div className="inputBx button">
-                                        <input type="submit" value="sign in" name="" />
+                                        <input type="submit" value="Sign in" name="" />
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </section>
+                </div>
                 </div>
     )
 }
